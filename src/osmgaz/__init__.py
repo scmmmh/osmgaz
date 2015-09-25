@@ -2,7 +2,14 @@ from .gazetteer import ContainmentGazetteer
 
 
 def main():
-    points = [(-2.63629, 53.39797), (-1.88313, 53.38129), (-3.43924, 51.88286), (-3.17516, 51.50650), (-2.99141, 53.40111)] # Warrington, Peak District, Beacons, Cardiff, Liverpool
+    points = [(-2.63629, 53.39797), # Dakota Park
+              (-1.88313, 53.38129), # Peak District
+              (-3.43924, 51.88286), # Brecon Beacons
+              (-3.17516, 51.50650), # Roath Park
+              (-2.99141, 53.40111), # Liverpool
+              (-2.04045, 53.34058), # Lyme Park
+              (-2.47429, 53.3827),  # Lymm
+              ]
     containment_gaz = ContainmentGazetteer('postgresql+psycopg2://osm:osmPWD@localhost:6543/osm')
     for point in points:
         print(point)

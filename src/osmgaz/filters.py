@@ -24,6 +24,7 @@ class ContainmentFilter(object):
     
     def __init__(self, containment_gazetteer):
         self.containment_gaz = containment_gazetteer
+        self.cache = {}
     
     def filter_duplicates(self, hierarchy):
         """This filters toponyms with the same name, if one of the two is a CEREMONIAL area."""
@@ -40,13 +41,13 @@ class ContainmentFilter(object):
         return filtered
 
     def filter_increments(self, hierarchy):
-        """This filters toponyms where the smaller of the two toponyms has more than 20% of the
+        """This filters toponyms where the smaller of the two toponyms has more than 25% of the
         larger toponym's area. Ensures that there is actual spatial value added by the toponyms.
         """ 
         filtered = []
         prev_size = 0
         for toponym, classification in hierarchy:
-            if len(filtered) == 0 or prev_size / float(toponym.tags['way_area']) <= 0.2:
+            if len(filtered) == 0 or prev_size / float(toponym.tags['way_area']) <= 0.25:
                 filtered.append((toponym, classification))
                 prev_size = float(toponym.tags['way_area'])
         if hierarchy[-1][0].tags['admin_level'] != filtered[-1][0].tags['admin_level']:
@@ -75,7 +76,7 @@ class ContainmentFilter(object):
         First applies the filter_duplicates and filter_increments. Then applies the filter_unique
         with the following conditions:
           * if there are more than 3 toponyms (first filter high-level, then low-level, then high-level)
-          * if there are exactly three toponyms and the middle one is CEREMONIAL
+          * if there are exactly three toponyms and the first one is at least level 8 ADMINISTRATIVE middle one is CEREMONIAL
           * if the first toponym is a NATIONAL PARK
         """
         filtered = self.filter_duplicates(toponyms)
@@ -87,7 +88,7 @@ class ContainmentFilter(object):
                 if len(filtered) > 3:
                     filtered = self.filter_unique(filtered, -3, -1)
         if len(filtered) == 3:
-            if type_match(filtered[1][1]['type'], ['AREA', 'CEREMONIAL']):
+            if type_match(filtered[0][1]['type'], ['AREA', 'ADMINISTRATIVE', '8']) and type_match(filtered[1][1]['type'], ['AREA', 'CEREMONIAL']):
                 filtered = self.filter_unique(filtered, 0, 2)
         if type_match(filtered[0][1]['type'], ['AREA', 'PARK', 'NATIONAL PARK']):
             filtered = self.filter_unique(filtered, 0, 2)

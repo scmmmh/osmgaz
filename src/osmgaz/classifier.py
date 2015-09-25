@@ -32,18 +32,23 @@ rules.extend([{'rules': {'boundary': 'national_park'},
               {'rules': {'landuse': 'recreation_ground'},
                'type': ['AREA', 'PARK', 'RECREATION GROUND']},
               {'rules': {'leisure': 'nature_reserve'},
-               'type': ['AREA', 'NATURE RESERVE']}])
+               'type': ['AREA', 'NATURE RESERVE']},
+              {'rules': {'leisure': 'park'},
+               'type': ['AREA', 'PARK']}])
 
 # Natural Areas Mapping Rules
 rules.extend([{'rules': {'landuse': 'forest',
                          'wood': 'coniferous'},
                'type': ['AREA', 'FOREST', 'CONIFEROUS']}])
 
+# Building Rules
+rules.extend([{'rules': {'building': 'yes', 'amenity': 'pub'},
+               'type': ['BUILDING', 'COMMERCIAL', 'FOOD AND DRINK', 'PUB']}])
+
 # Ignore these toponyms
 rules.extend([{'rules': {'public_transport': 'pay_scale_area'}},
               {'rules': {'boundary': 'vice_county'}},
-              {'rules': {'boundary': 'administrative', 'admin_level': '5'}}
-])
+              {'rules': {'boundary': 'administrative', 'admin_level': '5'}}])
 
 def classify(toponym):
     for rule in rules:
