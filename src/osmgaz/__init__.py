@@ -1,5 +1,6 @@
-from .gazetteer import ContainmentGazetteer
-
+from .classifier import output_unknown
+from .gazetteer import ContainmentGazetteer, ProximalGazetteer
+from .filters import ContainmentFilter
 
 def main():
     points = [(-2.63629, 53.39797), # Dakota Park
@@ -11,10 +12,18 @@ def main():
               (-2.47429, 53.3827),  # Lymm
               ]
     containment_gaz = ContainmentGazetteer('postgresql+psycopg2://osm:osmPWD@localhost:6543/osm')
+    containment_filter = ContainmentFilter(containment_gaz)
+    proximal_gaz = ProximalGazetteer('postgresql+psycopg2://osm:osmPWD@localhost:6543/osm')
     for point in points:
         print(point)
-        for toponym, classification in containment_gaz(point):
-            print(toponym.name, classification, float(toponym.tags['way_area']) / 1000000)
+        containment = containment_gaz(point)
+        filtered_containment = containment_filter(containment)
+        print(', '.join([t.name for t, _ in filtered_containment]))
+        proximal = proximal_gaz(point, {'full': containment, 'filtered': filtered_containment})
+        print(', '.join([t.name for t, _ in proximal]))
+        #for toponym, classification in proximal:
+        #    print(toponym.name, classification, toponym.tags)
+    output_unknown()
 
 """
 Data must always be reprojected to EPSG:3857 (which in OSM terms is 900913)

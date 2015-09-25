@@ -20,3 +20,26 @@ class Polygon(Base):
     way_area = Column(Numeric)
     way = Column(Geometry(srid=900913))
     tags = Column(HSTORE)
+
+
+class Line(Base):
+    
+    __tablename__ = 'planet_osm_line'
+    
+    osm_id = Column(Integer, primary_key=True)
+    name = Column(Unicode)
+    z_order = Column(Integer)
+    way_area = Column(Numeric)
+    way = Column(Geometry(srid=900913))
+    tags = Column(HSTORE)
+
+
+class Point(Base):
+    
+    __tablename__ = 'planet_osm_point'
+    
+    osm_id = Column(Integer, primary_key=True)
+    name = Column(Unicode)
+    z_order = Column(Integer)
+    way = Column(Geometry(srid=900913))
+    tags = Column(HSTORE)

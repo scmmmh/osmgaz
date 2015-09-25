@@ -8,9 +8,9 @@ from sqlalchemy.orm import sessionmaker
 from geoalchemy2 import WKTElement
 from pyproj import Proj
 
-from .models import Polygon
+from .models import Polygon, Line, Point
 from .classifier import classify
-from .filters import ContainmentFilter
+from .filters import type_match
 
 class Gazetteer(object):
     """Generic Gazetteer object that creates the database connection.
@@ -22,15 +22,6 @@ class Gazetteer(object):
         self.session = Session()
         self.proj = Proj('+init=EPSG:3857')
     
-
-class ContainmentGazetteer(Gazetteer):
-    """Handles containment queries.
-    """
-
-    def __init__(self, sqlalchemy_url):
-        Gazetteer.__init__(self, sqlalchemy_url)
-        self.filter = ContainmentFilter(self)
-        
     def query(self, query):
         """Runs the given query against the database and returns those
         toponyms that can be classifed using the classifier module.
@@ -42,13 +33,50 @@ class ContainmentGazetteer(Gazetteer):
                 toponyms.append((toponym, classification))
         return toponyms
         
+
+class ContainmentGazetteer(Gazetteer):
+    """Handles containment queries.
+    """
+
+    def __init__(self, sqlalchemy_url):
+        Gazetteer.__init__(self, sqlalchemy_url)
+        
     def __call__(self, point):
-        """Retrieves the containment hierarchy for the point (WGS84 lon/lat).
-        Returns the filtered list of toponyms using the ContainmentFilter.
+        """Retrieves the full containment hierarchy for the point (WGS84 lon/lat).
         """
         coords = self.proj(*point)
         toponyms = self.query(self.session.query(Polygon).filter(and_(Polygon.name != '',
                                                                       Polygon.way.ST_Contains(WKTElement('POINT(%f %f)' % coords,
                                                                                                          srid=900913)))))
         toponyms.sort(key=lambda i: float(i[0].tags['way_area']))
-        return self.filter(toponyms)
+        return toponyms
+
+
+class ProximalGazetteer(Gazetteer):
+    """Handles proximal queries.
+    """
+    
+    def __call__(self, point, containment):
+        coords = self.proj(*point)
+        containment_ids = [t.osm_id for t, _ in containment['full']]
+        for dist in [500, 1000, 1500, 3000]:
+            toponyms = []
+            for toponym, classification in self.query(self.session.query(Polygon).filter(and_(Polygon.name != '',
+                                                                                              Polygon.way.ST_DWithin(WKTElement('POINT(%f %f)' % coords,
+                                                                                                                                srid=900913),
+                                                                                                                     dist)))):
+                if toponym.osm_id not in containment_ids and not type_match(classification['type'], ['AREA', 'ADMINISTRATIVE']):
+                    toponyms.append((toponym, classification))
+            for toponym, classification in self.query(self.session.query(Line).filter(and_(Line.name != '',
+                                                                                           Line.way.ST_DWithin(WKTElement('POINT(%f %f)' % coords,
+                                                                                                                          srid=900913),
+                                                                                                               dist)))):
+                toponyms.append((toponym, classification))
+            for toponym, classification in self.query(self.session.query(Point).filter(and_(Point.name != '',
+                                                                                            Point.way.ST_DWithin(WKTElement('POINT(%f %f)' % coords,
+                                                                                                                            srid=900913),
+                                                                                                                 dist)))):
+                toponyms.append((toponym, classification))
+            if toponyms:
+                return toponyms
+        return []
