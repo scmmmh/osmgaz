@@ -1,0 +1,7 @@
+
+syntax: regexp
+^src/OSMGaz\.egg-info$
+syntax: regexp
+^\.project$
+syntax: regexp
+^\.pydevproject$
