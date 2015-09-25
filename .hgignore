@@ -5,3 +5,5 @@ syntax: regexp
 ^\.project$
 syntax: regexp
 ^\.pydevproject$
+syntax: regexp
+^\.settings$
