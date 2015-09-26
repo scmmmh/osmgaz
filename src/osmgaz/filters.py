@@ -90,7 +90,7 @@ class ContainmentFilter(object):
         if len(filtered) == 3:
             if type_match(filtered[0][1]['type'], ['AREA', 'ADMINISTRATIVE', '8']) and type_match(filtered[1][1]['type'], ['AREA', 'CEREMONIAL']):
                 filtered = self.filter_unique(filtered, 0, 2)
-        if type_match(filtered[0][1]['type'], ['AREA', 'PARK', 'NATIONAL PARK']):
+        if type_match(filtered[0][1]['type'], ['AREA', 'NATIONAL PARK']):
             filtered = self.filter_unique(filtered, 0, 2)
         return filtered
 

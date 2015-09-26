@@ -58,15 +58,13 @@ class ProximalGazetteer(Gazetteer):
     
     def __call__(self, point, containment):
         coords = self.proj(*point)
-        containment_ids = [t.osm_id for t, _ in containment['full']]
         for dist in [500, 1000, 1500, 3000]:
             toponyms = []
             for toponym, classification in self.query(self.session.query(Polygon).filter(and_(Polygon.name != '',
                                                                                               Polygon.way.ST_DWithin(WKTElement('POINT(%f %f)' % coords,
                                                                                                                                 srid=900913),
                                                                                                                      dist)))):
-                if toponym.osm_id not in containment_ids and not type_match(classification['type'], ['AREA', 'ADMINISTRATIVE']):
-                    toponyms.append((toponym, classification))
+                toponyms.append((toponym, classification))
             for toponym, classification in self.query(self.session.query(Line).filter(and_(Line.name != '',
                                                                                            Line.way.ST_DWithin(WKTElement('POINT(%f %f)' % coords,
                                                                                                                           srid=900913),

@@ -12,7 +12,8 @@ requires = ['shapely',
             'sqlalchemy',
             'psycopg2',
             'geoalchemy2',
-            'pyproj']
+            'pyproj',
+            'rdflib']
 
 
 setup(name='OSMGaz',
