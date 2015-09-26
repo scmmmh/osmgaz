@@ -18,6 +18,8 @@ class ToponymClassifier(object):
         self.unknown = []
     
     def load_rules(self):
+        """Load the classification rules from the ontology.
+        """
         def parse_tree(parent, ontology, path):
             for child, _, _ in ontology.triples((None, RDFS.subClassOf, parent)):
                 osm_type = path
@@ -46,6 +48,7 @@ class ToponymClassifier(object):
         ontology = Graph()
         ontology.load('src/osmgaz/rules.rdf')
         parse_tree(URIRef('http://work.room3b.eu/ontology/osm_types#OSM'), ontology, [])
+        self.rules.sort(key=lambda r: (len(r['rules']), len(r['type'])), reverse=True)
         
         # Add static ignore rules
         self.rules.extend([{'rules': {'public_transport': 'pay_scale_area'}},
