@@ -75,18 +75,3 @@ class ToponymClassifier(object):
                     return None
         self.unknown.append(toponym.tags)
         return None
-
-__classifier = None
-    
-def classify(toponym):
-    global __classifier
-    if __classifier is None:
-        __classifier = ToponymClassifier()
-    return __classifier(toponym)
-
-def output_unknown():
-    global __classifier
-    if __classifier is None:
-        __classifier = ToponymClassifier()
-    for tags in __classifier.get_unknown():
-        print(tags)

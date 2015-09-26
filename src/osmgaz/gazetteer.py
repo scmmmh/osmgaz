@@ -9,7 +9,7 @@ from geoalchemy2 import WKTElement
 from pyproj import Proj
 
 from .models import Polygon, Line, Point
-from .classifier import classify
+from .classifier import ToponymClassifier
 
 class Gazetteer(object):
     """Generic Gazetteer object that creates the database connection.
@@ -20,6 +20,7 @@ class Gazetteer(object):
         Session = sessionmaker(bind=engine)
         self.session = Session()
         self.proj = Proj('+init=EPSG:3857')
+        self.classifier = ToponymClassifier()
     
     def query(self, query):
         """Runs the given query against the database and returns those
@@ -27,7 +28,7 @@ class Gazetteer(object):
         """
         toponyms = []
         for toponym in query:
-            classification = classify(toponym)
+            classification = self.classifier(toponym)
             if classification:
                 toponyms.append((toponym, classification))
         return toponyms

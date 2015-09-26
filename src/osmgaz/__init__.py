@@ -1,4 +1,3 @@
-from .classifier import output_unknown
 from .gazetteer import ContainmentGazetteer, ProximalGazetteer
 from .filters import ContainmentFilter, ProximalFilter
 
@@ -25,7 +24,10 @@ def main():
         print(', '.join([t.name for t, _ in filtered_proximal]))
         #for toponym, classification in proximal:
         #    print(toponym.name, classification, toponym.tags)
-    output_unknown()
+    for tags in containment_gaz.classifier.get_unknown():
+        print(tags)
+    for tags in proximal_gaz.classifier.get_unknown():
+        print(tags)
 
 """
 Data must always be reprojected to EPSG:3857 (which in OSM terms is 900913)
