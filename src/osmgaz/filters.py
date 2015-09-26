@@ -75,9 +75,9 @@ class ContainmentFilter(object):
         """Runs the filtering pipline. Toponyms must be ordered by their size, smallest first.
         First applies the filter_duplicates and filter_increments. Then applies the filter_unique
         with the following conditions:
-          * if there are more than 3 toponyms (first filter high-level, then low-level, then high-level)
-          * if there are exactly three toponyms and the first one is at least level 8 ADMINISTRATIVE middle one is CEREMONIAL
-          * if the first toponym is a NATIONAL PARK
+        * if there are more than 3 toponyms (first filter high-level, then low-level, then high-level)
+        * if there are exactly three toponyms and the first one is at least level 8 ADMINISTRATIVE middle one is CEREMONIAL
+        * if the first toponym is a NATIONAL PARK
         """
         filtered = self.filter_duplicates(toponyms)
         filtered = self.filter_increments(filtered)
@@ -94,3 +94,22 @@ class ContainmentFilter(object):
             filtered = self.filter_unique(filtered, 0, 2)
         return filtered
 
+
+class ProximalFilter(object):
+    
+    def __call__(self, toponyms, containment):
+        """Filters out:
+        * containment toponyms,
+        * administrative toponyms
+        """
+        filtered = []
+        containment_ids = [t.osm_id for t, _ in containment]
+        for toponym, classification in toponyms:
+            accept = True
+            if toponym.osm_id in containment_ids:
+                accept = False
+            if type_match(classification['type'], ['AREA', 'ADMINISTRATIVE']):
+                accept = False
+            if accept:
+                filtered.append((toponym, classification))
+        return filtered

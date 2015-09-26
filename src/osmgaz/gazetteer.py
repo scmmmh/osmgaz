@@ -10,7 +10,6 @@ from pyproj import Proj
 
 from .models import Polygon, Line, Point
 from .classifier import classify
-from .filters import type_match
 
 class Gazetteer(object):
     """Generic Gazetteer object that creates the database connection.
@@ -58,7 +57,7 @@ class ProximalGazetteer(Gazetteer):
     
     def __call__(self, point, containment):
         coords = self.proj(*point)
-        for dist in [500, 1000, 1500, 3000]:
+        for dist in [400, 3000]:
             toponyms = []
             for toponym, classification in self.query(self.session.query(Polygon).filter(and_(Polygon.name != '',
                                                                                               Polygon.way.ST_DWithin(WKTElement('POINT(%f %f)' % coords,
