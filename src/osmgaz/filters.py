@@ -4,6 +4,8 @@ The filters module implements the functionality for filtering lists of toponyms.
 
 .. moduleauthor:: Mark Hall <mark.hall@mail.room3b.eu>
 """
+from geoalchemy2.shape import to_shape
+from shapely.geometry import Point
 from sqlalchemy import and_
 
 from .models import Polygon
@@ -97,19 +99,31 @@ class ContainmentFilter(object):
 
 class ProximalFilter(object):
     
-    def __call__(self, toponyms, containment):
+    def __init__(self, proximal_gaz):
+        self.proximal_gaz = proximal_gaz
+
+    def __call__(self, toponyms, point, containment):
         """Filters out:
         * containment toponyms,
         * administrative toponyms
+        * any PLACE toponyms if there is an ARTIFICIAL FEATURE - BUILDING within 50 meters
         """
+        point = Point(self.proximal_gaz.proj(*point))
         filtered = []
         containment_ids = [t.osm_id for t, _ in containment]
+        has_buildings = False
+        for toponym, classification in toponyms:
+            if type_match(classification['type'], ['ARTIFICIAL FEATURE', 'BUILDING']) and point.distance(to_shape(toponym.way)) <= 50:
+                has_buildings = True
         for toponym, classification in toponyms:
             accept = True
             if toponym.osm_id in containment_ids:
                 accept = False
             if type_match(classification['type'], ['AREA', 'ADMINISTRATIVE']):
                 accept = False
+            if has_buildings:
+                if type_match(classification['type'], ['PLACE']):
+                    accept = False
             if accept:
                 filtered.append((toponym, classification))
         return filtered
