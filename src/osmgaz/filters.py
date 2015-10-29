@@ -113,7 +113,7 @@ class ProximalFilter(object):
         containment_ids = [t.osm_id for t, _ in containment]
         has_buildings = False
         for toponym, classification in toponyms:
-            if type_match(classification['type'], ['ARTIFICIAL FEATURE', 'BUILDING']) and point.distance(to_shape(toponym.way)) <= 50:
+            if type_match(classification['type'], ['ARTIFICIAL FEATURE', 'BUILDING']) and point.distance(to_shape(toponym.way)) <= 400:
                 has_buildings = True
         for toponym, classification in toponyms:
             accept = True

@@ -14,32 +14,59 @@ class Polygon(Base):
     
     __tablename__ = 'planet_osm_polygon'
     
-    osm_id = Column(Integer, primary_key=True)
+    gid = Column(Integer, primary_key=True)
+    osm_id = Column(Integer)
     name = Column(Unicode)
     z_order = Column(Integer)
     way_area = Column(Numeric)
     way = Column(Geometry(srid=900913))
     tags = Column(HSTORE)
+    classification = Column(Unicode(255))
 
 
 class Line(Base):
     
     __tablename__ = 'planet_osm_line'
     
+    gid = Column(Integer, primary_key=True)
     osm_id = Column(Integer, primary_key=True)
     name = Column(Unicode)
     z_order = Column(Integer)
     way_area = Column(Numeric)
     way = Column(Geometry(srid=900913))
     tags = Column(HSTORE)
+    classification = Column(Unicode(255))
 
 
 class Point(Base):
     
     __tablename__ = 'planet_osm_point'
     
+    gid = Column(Integer, primary_key=True)
     osm_id = Column(Integer, primary_key=True)
     name = Column(Unicode)
     z_order = Column(Integer)
     way = Column(Geometry(srid=900913))
     tags = Column(HSTORE)
+    classification = Column(Unicode(255))
+
+
+class NameSalienceCache(Base):
+    
+    __tablename__ = 'name_salience_cache'
+    
+    id = Column(Integer, primary_key=True)
+    category = Column(Unicode(255))
+    toponym_id = Column(Integer)
+    container_id = Column(Integer)
+    salience = Column(Numeric)
+
+
+class TypeSalienceCache(Base):
+    
+    __tablename__ = 'type_salience_cache'
+    
+    id = Column(Integer, primary_key=True)
+    toponym_type = Column(Unicode(255))
+    container_id = Column(Integer)
+    salience = Column(Numeric)

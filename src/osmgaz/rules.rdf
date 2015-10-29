@@ -51,6 +51,35 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#ATM -->
+
+    <owl:Class rdf:about="&osm_types;ATM">
+        <rdfs:label rdf:datatype="&xsd;string">ATM</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;ATM&quot;, &quot;amenity&quot;: &quot;atm&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Accommodation -->
+
+    <owl:Class rdf:about="&osm_types;Accommodation">
+        <rdfs:label rdf:datatype="&xsd;string">Accommodation</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Commercial"/>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Accountant -->
+
+    <owl:Class rdf:about="&osm_types;Accountant">
+        <rdfs:label rdf:datatype="&xsd;string">Accountant</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;office&quot;: &quot;accountant&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Administrative -->
 
     <owl:Class rdf:about="&osm_types;Administrative">
@@ -69,6 +98,26 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Advice -->
+
+    <owl:Class rdf:about="&osm_types;Advice">
+        <rdfs:label rdf:datatype="&xsd;string">Advice</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;advice&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Aerodrome -->
+
+    <owl:Class rdf:about="&osm_types;Aerodrome">
+        <rdfs:label rdf:datatype="&xsd;string">Aerodrome</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;AirTransport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;aeroway&quot;: &quot;aerodrome&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Agricultural -->
 
     <owl:Class rdf:about="&osm_types;Agricultural">
@@ -78,12 +127,81 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#AirHoldingPosition -->
+
+    <owl:Class rdf:about="&osm_types;AirHoldingPosition">
+        <rdfs:label rdf:datatype="&xsd;string">Holding Position</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;AirTransport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;aeroway&quot;: &quot;holding_position&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#AirTransport -->
+
+    <owl:Class rdf:about="&osm_types;AirTransport">
+        <rdfs:label rdf:datatype="&xsd;string">Air</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Transport"/>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Allotment -->
+
+    <owl:Class rdf:about="&osm_types;Allotment">
+        <rdfs:label rdf:datatype="&xsd;string">Allotment</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Agricultural"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;allotments&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#AntiquesShop -->
+
+    <owl:Class rdf:about="&osm_types;AntiquesShop">
+        <rdfs:label rdf:datatype="&xsd;string">Antiques Shop</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;antiques&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ApartmentAccommodation -->
+
+    <owl:Class rdf:about="&osm_types;ApartmentAccommodation">
+        <rdfs:label rdf:datatype="&xsd;string">Apartment</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Accommodation"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;apartment&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Apartments -->
 
     <owl:Class rdf:about="&osm_types;Apartments">
         <rdfs:label rdf:datatype="&xsd;string">Apartments</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Residential"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;apartments&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;building&quot;: &quot;apartments&quot;}, {&quot;building&quot;: &quot;flats&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Apron -->
+
+    <owl:Class rdf:about="&osm_types;Apron">
+        <rdfs:label>Apron</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;AirTransport"/>
+        <rdfs:isDefinedBy>{&quot;aeroway&quot;: &quot;apron&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ArchaeologicalSite -->
+
+    <owl:Class rdf:about="&osm_types;ArchaeologicalSite">
+        <rdfs:label rdf:datatype="&xsd;string">Archaeological Site</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Historic"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;historic&quot;: &quot;archaeological_site&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -94,6 +212,37 @@
         <rdfs:label rdf:datatype="&xsd;string">Area</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;OSM"/>
         <rdfs:comment rdf:datatype="&xsd;string">An abitrarily defined area that has no or only accidental physical boundaries.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;area&quot;: &quot;yes&quot;}</rdfs:isDefinedBy>
+        <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ArtCentre -->
+
+    <owl:Class rdf:about="&osm_types;ArtCentre">
+        <rdfs:label rdf:datatype="&xsd;string">Arts Centre</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;arts_centre&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ArtShop -->
+
+    <owl:Class rdf:about="&osm_types;ArtShop">
+        <rdfs:label rdf:datatype="&xsd;string">Art</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;art&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ArtificialFlowingWater -->
+
+    <owl:Class rdf:about="&osm_types;ArtificialFlowingWater">
+        <rdfs:label rdf:datatype="&xsd;string">Flowing Water</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Water_Way"/>
     </owl:Class>
     
 
@@ -117,6 +266,27 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Association -->
+
+    <owl:Class rdf:about="&osm_types;Association">
+        <rdfs:label rdf:datatype="&xsd;string">Association</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;OfficeBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;office&quot;: &quot;association&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Attraction -->
+
+    <owl:Class rdf:about="&osm_types;Attraction">
+        <rdfs:label>Attraction</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <extra_settings>{&quot;warn&quot;: true}</extra_settings>
+        <rdfs:isDefinedBy>{&quot;tourism&quot;: &quot;attraction&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Automobile -->
 
     <owl:Class rdf:about="&osm_types;Automobile">
@@ -127,12 +297,122 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#AutomobileShop -->
+
+    <owl:Class rdf:about="&osm_types;AutomobileShop">
+        <rdfs:label rdf:datatype="&xsd;string">Automobile</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;car_parts&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#AutomotiveShop -->
+
+    <owl:Class rdf:about="&osm_types;AutomotiveShop">
+        <rdfs:label rdf:datatype="&xsd;string">Automotive Shop</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;:&quot;car&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#BabyShop -->
+
+    <owl:Class rdf:about="&osm_types;BabyShop">
+        <rdfs:label rdf:datatype="&xsd;string">Baby</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;baby&quot;}, {&quot;shop&quot;: &quot;Baby&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Bakery -->
+
+    <owl:Class rdf:about="&osm_types;Bakery">
+        <rdfs:label rdf:datatype="&xsd;string">Bakery</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;bakery&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Bank -->
+
+    <owl:Class rdf:about="&osm_types;Bank">
+        <rdfs:label rdf:datatype="&xsd;string">Bank</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;bank&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Bar -->
 
     <owl:Class rdf:about="&osm_types;Bar">
         <rdfs:label rdf:datatype="&xsd;string">Bar</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;bar&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#BareRock -->
+
+    <owl:Class rdf:about="&osm_types;BareRock">
+        <rdfs:label rdf:datatype="&xsd;string">Bare Rock</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;natural&quot;: &quot;bare_rock&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Barracks -->
+
+    <owl:Class rdf:about="&osm_types;Barracks">
+        <rdfs:label rdf:datatype="&xsd;string">Barracks</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;MilitaryBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;landuse&quot;: &quot;military&quot;, &quot;military&quot;: &quot;barracks&quot;}, {&quot;military&quot;: &quot;barracks&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Baseball -->
+
+    <owl:Class rdf:about="&osm_types;Baseball">
+        <rdfs:label rdf:datatype="&xsd;string">Baseball</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;pitch&quot;, &quot;sport&quot;: &quot;baseball&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#BeautySalon -->
+
+    <owl:Class rdf:about="&osm_types;BeautySalon">
+        <rdfs:label rdf:datatype="&xsd;string">Beauty</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Salon"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;beauty&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#BedAndBreakfast -->
+
+    <owl:Class rdf:about="&osm_types;BedAndBreakfast">
+        <rdfs:label rdf:datatype="&xsd;string">Bed and Breakfast</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Accommodation"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;bed_and_breakfast&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#BettingShop -->
+
+    <owl:Class rdf:about="&osm_types;BettingShop">
+        <rdfs:label rdf:datatype="&xsd;string">Gambling</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;betting&quot;, &quot;shop&quot;: &quot;betting&quot;}, {&quot;amenity&quot;: &quot;gambling&quot;}, {&quot;shop&quot;: &quot;bookmaker&quot;}, {&quot;amenity&quot;: &quot;casino&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -152,7 +432,7 @@
     <owl:Class rdf:about="&osm_types;BicyclePath">
         <rdfs:label rdf:datatype="&xsd;string">Cycle</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Path"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;cycleway&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;highway&quot;: &quot;cycleway&quot;}, {&quot;cycleway&quot;: &quot;track&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -171,8 +451,78 @@
 
     <owl:Class rdf:about="&osm_types;BicycleShop">
         <rdfs:label rdf:datatype="&xsd;string">Bicycle shop</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;bicycle&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#BirdHide -->
+
+    <owl:Class rdf:about="&osm_types;BirdHide">
+        <rdfs:label rdf:datatype="&xsd;string">Bird Hide</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;bird_hide&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#BoatRental -->
+
+    <owl:Class rdf:about="&osm_types;BoatRental">
+        <rdfs:label rdf:datatype="&xsd;string">Boat Rental</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;boat_rental&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#BookShop -->
+
+    <owl:Class rdf:about="&osm_types;BookShop">
+        <rdfs:label rdf:datatype="&xsd;string">Book Shop</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;book&quot;}, {&quot;shop&quot;: &quot;books&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Boutique -->
+
+    <owl:Class rdf:about="&osm_types;Boutique">
+        <rdfs:label rdf:datatype="&xsd;string">Boutique</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;boutique&quot;}, {&quot;shop&quot;: &quot;Vintage_Boutique&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Bowls -->
+
+    <owl:Class rdf:about="&osm_types;Bowls">
+        <rdfs:label rdf:datatype="&xsd;string">Bowls</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;sport&quot;: &quot;bowls&quot;}, {&quot;leisure&quot;: &quot;pitch&quot;, &quot;sport&quot;: &quot;bowls_&amp;Croquet&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Bridge -->
+
+    <owl:Class rdf:about="&osm_types;Bridge">
+        <rdfs:label rdf:datatype="&xsd;string">Bridge</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;building&quot; :&quot;bridge&quot;}, {&quot;bridge&quot;: &quot;yes&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Bridleway -->
+
+    <owl:Class rdf:about="&osm_types;Bridleway">
+        <rdfs:label rdf:datatype="&xsd;string">Bridleway</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Path"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;bridleway&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -188,12 +538,42 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#BureauDeChange -->
+
+    <owl:Class rdf:about="&osm_types;BureauDeChange">
+        <rdfs:label rdf:datatype="&xsd;string">Bureau-de-Change</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;bureau_de_change&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#BusStop -->
 
     <owl:Class rdf:about="&osm_types;BusStop">
         <rdfs:label rdf:datatype="&xsd;string">Bus stop</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;PublicTransport"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;bus_stop&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;highway&quot;: &quot;bus_stop&quot;}, {&quot;amenity&quot;: &quot;bus_station&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Butcher -->
+
+    <owl:Class rdf:about="&osm_types;Butcher">
+        <rdfs:label rdf:datatype="&xsd;string">Butcher</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;butcher&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Byway -->
+
+    <owl:Class rdf:about="&osm_types;Byway">
+        <rdfs:label rdf:datatype="&xsd;string">Byway</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;byway&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -208,12 +588,122 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Cairn -->
+
+    <owl:Class rdf:about="&osm_types;Cairn">
+        <rdfs:label rdf:datatype="&xsd;string">Cairn</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;man_made&quot;: &quot;cairn&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CampSite -->
+
+    <owl:Class rdf:about="&osm_types;CampSite">
+        <rdfs:label rdf:datatype="&xsd;string">Camp Site</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Accommodation"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;camp_site&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Canal -->
 
     <owl:Class rdf:about="&osm_types;Canal">
         <rdfs:label rdf:datatype="&xsd;string">Canal</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&osm_types;Water_Way"/>
+        <rdfs:subClassOf rdf:resource="&osm_types;ArtificialFlowingWater"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;natural&quot;: &quot;water&quot;, &quot;water&quot;: &quot;canal&quot;}, {&quot;waterway&quot;: &quot;canal&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CarRental -->
+
+    <owl:Class rdf:about="&osm_types;CarRental">
+        <rdfs:label rdf:datatype="&xsd;string">Car Rental</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;car_rental&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CarRepair -->
+
+    <owl:Class rdf:about="&osm_types;CarRepair">
+        <rdfs:label rdf:datatype="&xsd;string">Car Repair</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;car_repair&quot;}, {&quot;amenity&quot;: &quot;garage&quot;}, {&quot;building&quot;: &quot;garage&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CarWash -->
+
+    <owl:Class rdf:about="&osm_types;CarWash">
+        <rdfs:label rdf:datatype="&xsd;string">Car Wash</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;car_wash&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CaravanSite -->
+
+    <owl:Class rdf:about="&osm_types;CaravanSite">
+        <rdfs:label rdf:datatype="&xsd;string">Caravan Site</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Accommodation"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;caravan_site&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CareHome -->
+
+    <owl:Class rdf:about="&osm_types;CareHome">
+        <rdfs:label rdf:datatype="&xsd;string">Care Home</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Health"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;residential_home&quot;}, {&quot;amenity&quot;: &quot;nursing_home&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Carpenter -->
+
+    <owl:Class rdf:about="&osm_types;Carpenter">
+        <rdfs:label rdf:datatype="&xsd;string">Carpenter</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;craft&quot;: &quot;carpenter&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Castle -->
+
+    <owl:Class rdf:about="&osm_types;Castle">
+        <rdfs:label rdf:datatype="&xsd;string">Castle</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Historic"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;historic&quot;: &quot;castle&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CatalogueShop -->
+
+    <owl:Class rdf:about="&osm_types;CatalogueShop">
+        <rdfs:label rdf:datatype="&xsd;string">Catalogue</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;catalogue&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Cave -->
+
+    <owl:Class rdf:about="&osm_types;Cave">
+        <rdfs:label rdf:datatype="&xsd;string">Cave</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;natural&quot;: &quot;cave_entrance&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -223,7 +713,7 @@
     <owl:Class rdf:about="&osm_types;Cemetery">
         <rdfs:label rdf:datatype="&xsd;string">Cemetery</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;PublicBuilding"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;cemetery&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;landuse&quot;: &quot;cemetery&quot;}, {&quot;amenity&quot;: &quot;grave_yard&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -238,11 +728,173 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Chalet -->
+
+    <owl:Class rdf:about="&osm_types;Chalet">
+        <rdfs:label rdf:datatype="&xsd;string">Chalet</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Accommodation"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;chalet&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Charity -->
+
+    <owl:Class rdf:about="&osm_types;Charity">
+        <rdfs:label rdf:datatype="&xsd;string">Charity</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;OfficeBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;office&quot;: &quot;charity&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CharityShop -->
+
+    <owl:Class rdf:about="&osm_types;CharityShop">
+        <rdfs:label rdf:datatype="&xsd;string">Charity Shop</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;charity&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CheckinBuilding -->
+
+    <owl:Class rdf:about="&osm_types;CheckinBuilding">
+        <rdfs:label rdf:datatype="&xsd;string">Check-in</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;AirTransport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;checkin&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CinemaBuilding -->
+
+    <owl:Class rdf:about="&osm_types;CinemaBuilding">
+        <rdfs:label rdf:datatype="&xsd;string">Cinema</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;cinema&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#City -->
+
+    <owl:Class rdf:about="&osm_types;City">
+        <rdfs:label>City</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Place"/>
+        <rdfs:isDefinedBy>{&quot;place&quot;: &quot;city&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Cliff -->
+
+    <owl:Class rdf:about="&osm_types;Cliff">
+        <rdfs:label rdf:datatype="&xsd;string">Cliff</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;natural&quot;: &quot;cliff&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ClothesShop -->
+
+    <owl:Class rdf:about="&osm_types;ClothesShop">
+        <rdfs:label rdf:datatype="&xsd;string">Clothes Shop</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;clothes&quot;}, {&quot;shop&quot;: &quot;fashion&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Club -->
+
+    <owl:Class rdf:about="&osm_types;Club">
+        <rdfs:label rdf:datatype="&xsd;string">Club</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;club&quot;}, {&quot;leisure&quot;: &quot;club&quot;}, {&quot;club&quot;: &quot;politics&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Clubhouse -->
+
+    <owl:Class rdf:about="&osm_types;Clubhouse">
+        <rdfs:label rdf:datatype="&xsd;string">Clubhouse</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;clubhouse&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#College -->
+
+    <owl:Class rdf:about="&osm_types;College">
+        <rdfs:label rdf:datatype="&xsd;string">College</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Education"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;college&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Commercial -->
 
     <owl:Class rdf:about="&osm_types;Commercial">
         <rdfs:label rdf:datatype="&xsd;string">Commercial</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;landuse&quot;: &quot;commercial&quot;}, {&quot;building&quot;: &quot;commercial&quot;}]</rdfs:isDefinedBy>
+        <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Common -->
+
+    <owl:Class rdf:about="&osm_types;Common">
+        <rdfs:label rdf:datatype="&xsd;string">Common</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;common&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#CommunityCentre -->
+
+    <owl:Class rdf:about="&osm_types;CommunityCentre">
+        <rdfs:label rdf:datatype="&xsd;string">Community Centre</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;community_centre&quot;}, {&quot;amenity&quot;: &quot;social_centre&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Confectionary -->
+
+    <owl:Class rdf:about="&osm_types;Confectionary">
+        <rdfs:label rdf:datatype="&xsd;string">Confectionary</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;confectionary&quot;}, {&quot;shop&quot;: &quot;confectionery&quot;}, {&quot;shop&quot;: &quot;cakes&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ConferenceRoom -->
+
+    <owl:Class rdf:about="&osm_types;ConferenceRoom">
+        <rdfs:label rdf:datatype="&xsd;string">Conference Centre</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;OfficeBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;business&quot;: &quot;conference room&quot;}, {&quot;amenity&quot;: &quot;conference_centre&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Confluence -->
+
+    <owl:Class rdf:about="&osm_types;Confluence">
+        <rdfs:label rdf:datatype="&xsd;string">Confluence</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Place"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;place&quot;: &quot;confluence&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -257,6 +909,16 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Construction -->
+
+    <owl:Class rdf:about="&osm_types;Construction">
+        <rdfs:label rdf:datatype="&xsd;string">Construction</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Artificial_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;construction&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#ConvenienceShop -->
 
     <owl:Class rdf:about="&osm_types;ConvenienceShop">
@@ -267,12 +929,162 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#CraftShop -->
+
+    <owl:Class rdf:about="&osm_types;CraftShop">
+        <rdfs:label rdf:datatype="&xsd;string">Craft</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;craft&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Crematorium -->
+
+    <owl:Class rdf:about="&osm_types;Crematorium">
+        <rdfs:label rdf:datatype="&xsd;string">Crematorium</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Health"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;crematorium&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Cricket -->
+
+    <owl:Class rdf:about="&osm_types;Cricket">
+        <rdfs:label rdf:datatype="&xsd;string">Cricket</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;pitch&quot;, &quot;sport&quot;: &quot;Cricket&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#DIYShop -->
+
+    <owl:Class rdf:about="&osm_types;DIYShop">
+        <rdfs:label rdf:datatype="&xsd;string">Do-It-Yourself</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;doityourself&quot;}, {&quot;shop&quot;: &quot;hardware&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Dam -->
+
+    <owl:Class rdf:about="&osm_types;Dam">
+        <rdfs:label rdf:datatype="&xsd;string">Dam</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;StandingWater"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;waterway&quot;: &quot;dam&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Deli -->
+
+    <owl:Class rdf:about="&osm_types;Deli">
+        <rdfs:label rdf:datatype="&xsd;string">Deli</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;deli&quot;}, {&quot;shop&quot;: &quot;delicatessen&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Dentist -->
+
+    <owl:Class rdf:about="&osm_types;Dentist">
+        <rdfs:label rdf:datatype="&xsd;string">Dentist</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Health"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;dentist&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#DepartmentStore -->
+
+    <owl:Class rdf:about="&osm_types;DepartmentStore">
+        <rdfs:label>Department Store</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy>{&quot;shop&quot;: &quot;department_store&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Distillery -->
+
+    <owl:Class rdf:about="&osm_types;Distillery">
+        <rdfs:label rdf:datatype="&xsd;string">Distillery</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Industrial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;distillery&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#DisusedObject -->
+
+    <owl:Class rdf:about="&osm_types;DisusedObject">
+        <rdfs:label>Disused</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy>{&quot;disused&quot;: &quot;yes&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#DisusedRailway -->
+
+    <owl:Class rdf:about="&osm_types;DisusedRailway">
+        <rdfs:label rdf:datatype="&xsd;string">Disused</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Rail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;railway&quot;: &quot;abandoned&quot;, &quot;abandoned&quot;: &quot;tramway&quot;}, {&quot;railway&quot;: &quot;abandoned&quot;}, {&quot;railway&quot;: &quot;disused&quot;}, {&quot;railway&quot;: &quot;dismantled&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#DisusedRailwayStation -->
+
+    <owl:Class rdf:about="&osm_types;DisusedRailwayStation">
+        <rdfs:label rdf:datatype="&xsd;string">Disused</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Station"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;railway&quot;: &quot;disused_station&quot;}, {&quot;railway&quot;: &quot;station_site&quot;, &quot;disused&quot;: &quot;yes&quot;}, {&quot;railway&quot;: &quot;station_site&quot;, &quot;abandoned&quot;: &quot;station&quot;}, {&quot;railway&quot;: &quot;disused&quot;, &quot;station&quot;: &quot;disused&quot;}, {&quot;railway&quot;: &quot;disused&quot;, &quot;disused&quot;: &quot;station&quot;}, {&quot;historic:railway&quot;: &quot;station&quot;}, {&quot;railway:historic&quot;: &quot;station&quot;}, {&quot;railway&quot;: &quot;abandoned&quot;, &quot;abandoned&quot;: &quot;station&quot;}, {&quot;disused:railway&quot;: &quot;station&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#DisusedRoad -->
+
+    <owl:Class rdf:about="&osm_types;DisusedRoad">
+        <rdfs:label rdf:datatype="&xsd;string">Disused</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;historic:highway&quot;: &quot;unclassified&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Dock -->
 
     <owl:Class rdf:about="&osm_types;Dock">
         <rdfs:label rdf:datatype="&xsd;string">Dock</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&osm_types;Water_Way"/>
+        <rdfs:subClassOf rdf:resource="&osm_types;StandingWater"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;waterway&quot;: &quot;dock&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Doctor -->
+
+    <owl:Class rdf:about="&osm_types;Doctor">
+        <rdfs:label rdf:datatype="&xsd;string">Doctor</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Health"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;doctors&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#DryCleaning -->
+
+    <owl:Class rdf:about="&osm_types;DryCleaning">
+        <rdfs:label rdf:datatype="&xsd;string">Dry Cleaning</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;dry_cleaning&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -282,6 +1094,68 @@
     <owl:Class rdf:about="&osm_types;Education">
         <rdfs:label rdf:datatype="&xsd;string">Education</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;Education&quot;}</rdfs:isDefinedBy>
+        <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Electricity -->
+
+    <owl:Class rdf:about="&osm_types;Electricity">
+        <rdfs:label rdf:datatype="&xsd;string">Electricity</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Industrial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;power&quot;: &quot;sub_station&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ElectrifiedRailway -->
+
+    <owl:Class rdf:about="&osm_types;ElectrifiedRailway">
+        <rdfs:label rdf:datatype="&xsd;string">Electrified</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Rail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;railway&quot;: &quot;rail&quot;, &quot;electrified&quot;: &quot;rail&quot;}, {&quot;railway&quot;: &quot;rail&quot;, &quot;electrified&quot;: &quot;contact_line&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ElectronicsShop -->
+
+    <owl:Class rdf:about="&osm_types;ElectronicsShop">
+        <rdfs:label rdf:datatype="&xsd;string">Electronics</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;electronics&quot;}, {&quot;shop&quot;: &quot;computer&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#EmploymentAgency -->
+
+    <owl:Class rdf:about="&osm_types;EmploymentAgency">
+        <rdfs:label>Employment Agency</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy>{&quot;office&quot;: &quot;employment_agency&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#EstateAgent -->
+
+    <owl:Class rdf:about="&osm_types;EstateAgent">
+        <rdfs:label rdf:datatype="&xsd;string">Estate Agent</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;office&quot;: &quot;estate_agent&quot;}, {&quot;shop&quot;: &quot;estate_agent&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#FabricShop -->
+
+    <owl:Class rdf:about="&osm_types;FabricShop">
+        <rdfs:label rdf:datatype="&xsd;string">Fabric</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;fabric&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -291,7 +1165,7 @@
     <owl:Class rdf:about="&osm_types;Farm">
         <rdfs:label rdf:datatype="&xsd;string">Farm</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Agricultural"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;farmyard&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;landuse&quot;: &quot;farmyard&quot;}, {&quot;landuse&quot;: &quot;farm&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -302,6 +1176,55 @@
         <rdfs:label rdf:datatype="&xsd;string">Fast Food</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;fast_food&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Ferry -->
+
+    <owl:Class rdf:about="&osm_types;Ferry">
+        <rdfs:label rdf:datatype="&xsd;string">Ferry</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Transport"/>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#FerryTerminal -->
+
+    <owl:Class rdf:about="&osm_types;FerryTerminal">
+        <rdfs:label rdf:datatype="&xsd;string">Terminal</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Ferry"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;ferry_terminal&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#FireStation -->
+
+    <owl:Class rdf:about="&osm_types;FireStation">
+        <rdfs:label rdf:datatype="&xsd;string">Fire Station</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;PublicBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;fire_station&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#FishingShop -->
+
+    <owl:Class rdf:about="&osm_types;FishingShop">
+        <rdfs:label rdf:datatype="&xsd;string">Fishing</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;Fishing_Tackle&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Florist -->
+
+    <owl:Class rdf:about="&osm_types;Florist">
+        <rdfs:label rdf:datatype="&xsd;string">Florist</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;florist&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -320,6 +1243,18 @@
     <owl:Class rdf:about="&osm_types;Food_And_Drink">
         <rdfs:label rdf:datatype="&xsd;string">Food and Drink</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Commercial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;food&quot;}</rdfs:isDefinedBy>
+        <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Football -->
+
+    <owl:Class rdf:about="&osm_types;Football">
+        <rdfs:label rdf:datatype="&xsd;string">Football</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;leisure&quot;: &quot;pitch&quot;, &quot;sport&quot;: &quot;football&quot;}, {&quot;leisure&quot;: &quot;stadium&quot;, &quot;sport&quot;: &quot;soccer&quot;}, {&quot;leisure&quot;: &quot;pitch&quot;, &quot;sport&quot;: &quot;soccer&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -329,7 +1264,17 @@
     <owl:Class rdf:about="&osm_types;Footpath">
         <rdfs:label rdf:datatype="&xsd;string">Foot</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Path"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;highway&quot;: &quot;pedestrian&quot;}, {&quot;highway&quot;: &quot;footway&quot;}]</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;highway&quot;: &quot;pedestrian&quot;}, {&quot;highway&quot;: &quot;footway&quot;}, {&quot;highway&quot;: &quot;steps&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Ford -->
+
+    <owl:Class rdf:about="&osm_types;Ford">
+        <rdfs:label rdf:datatype="&xsd;string">Ford</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Path"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;ford&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -339,8 +1284,48 @@
     <owl:Class rdf:about="&osm_types;Forest">
         <rdfs:label rdf:datatype="&xsd;string">Forest</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;forest&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;landuse&quot;: &quot;forest&quot;}, {&quot;natural&quot;: &quot;wood&quot;}]</rdfs:isDefinedBy>
         <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#FramingShop -->
+
+    <owl:Class rdf:about="&osm_types;FramingShop">
+        <rdfs:label rdf:datatype="&xsd;string">Framing</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;frame&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#FuelStation -->
+
+    <owl:Class rdf:about="&osm_types;FuelStation">
+        <rdfs:label rdf:datatype="&xsd;string">Fuel Station</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;fuel&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Funeral -->
+
+    <owl:Class rdf:about="&osm_types;Funeral">
+        <rdfs:label rdf:datatype="&xsd;string">Funeral</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;funeral_directors&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#FurnitureShop -->
+
+    <owl:Class rdf:about="&osm_types;FurnitureShop">
+        <rdfs:label rdf:datatype="&xsd;string">Furniture</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;furniture&quot;}, {&quot;shop&quot;: &quot;Furnishings&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -355,12 +1340,151 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Games -->
+
+    <owl:Class rdf:about="&osm_types;Games">
+        <rdfs:label rdf:datatype="&xsd;string">Game</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;video_games&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Garden -->
+
+    <owl:Class rdf:about="&osm_types;Garden">
+        <rdfs:label rdf:datatype="&xsd;string">Garden</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;garden&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#GardenCentre -->
+
+    <owl:Class rdf:about="&osm_types;GardenCentre">
+        <rdfs:label rdf:datatype="&xsd;string">Garden Centre</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;garden_centre&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Gardening -->
+
+    <owl:Class rdf:about="&osm_types;Gardening">
+        <rdfs:label rdf:datatype="&xsd;string">Gardening</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;craft&quot;: &quot;gardener&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#GateObject -->
+
+    <owl:Class rdf:about="&osm_types;GateObject">
+        <rdfs:label rdf:datatype="&xsd;string">Gate</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;barrier&quot;: &quot;gate&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#GeneralStore -->
+
+    <owl:Class rdf:about="&osm_types;GeneralStore">
+        <rdfs:label rdf:datatype="&xsd;string">General</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;general&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#GiftShop -->
+
+    <owl:Class rdf:about="&osm_types;GiftShop">
+        <rdfs:label rdf:datatype="&xsd;string">Gift Shop</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;gift&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#GolfCourse -->
+
+    <owl:Class rdf:about="&osm_types;GolfCourse">
+        <rdfs:label rdf:datatype="&xsd;string">Golf Course</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;golf_course&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Grandstand -->
+
+    <owl:Class rdf:about="&osm_types;Grandstand">
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;grandstand&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Grassland -->
+
+    <owl:Class rdf:about="&osm_types;Grassland">
+        <rdfs:label rdf:datatype="&xsd;string">Grassland</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;natural&quot;: &quot;grassland&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Greengrocer -->
+
+    <owl:Class rdf:about="&osm_types;Greengrocer">
+        <rdfs:label rdf:datatype="&xsd;string">Greengrocer</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;greengrocer&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Greenhouse -->
 
     <owl:Class rdf:about="&osm_types;Greenhouse">
         <rdfs:label rdf:datatype="&xsd;string">Greenhouse</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Agricultural"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;greenhouse&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#GreetingsCards -->
+
+    <owl:Class rdf:about="&osm_types;GreetingsCards">
+        <rdfs:label rdf:datatype="&xsd;string">Greetings Cards</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;greetings cards&quot;}, {&quot;shop&quot;: &quot;greeting_card&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#GuestHouse -->
+
+    <owl:Class rdf:about="&osm_types;GuestHouse">
+        <rdfs:label rdf:datatype="&xsd;string">Guest House</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Accommodation"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;guest_house&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Guidepost -->
+
+    <owl:Class rdf:about="&osm_types;Guidepost">
+        <rdfs:label rdf:datatype="&xsd;string">Guidepost</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;InformationObject"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;information&quot;, &quot;information&quot;: &quot;guidepost&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -380,7 +1504,97 @@
     <owl:Class rdf:about="&osm_types;Hall">
         <rdfs:label rdf:datatype="&xsd;string">Hall</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;PublicBuilding"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;hall&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;hall&quot;}, {&quot;building&quot;: &quot;village_hall&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Hamlet -->
+
+    <owl:Class rdf:about="&osm_types;Hamlet">
+        <rdfs:label rdf:datatype="&xsd;string">Hamlet</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Place"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;place&quot;: &quot;hamlet&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Health -->
+
+    <owl:Class rdf:about="&osm_types;Health">
+        <rdfs:label rdf:datatype="&xsd;string">Health</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#HealthCentre -->
+
+    <owl:Class rdf:about="&osm_types;HealthCentre">
+        <rdfs:label rdf:datatype="&xsd;string">Health Centre</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Health"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;health_centre&quot;}, {&quot;amenity&quot;: &quot;healing_centre&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#HealthFood -->
+
+    <owl:Class rdf:about="&osm_types;HealthFood">
+        <rdfs:label rdf:datatype="&xsd;string">Health Food</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;health_food&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Heath -->
+
+    <owl:Class rdf:about="&osm_types;Heath">
+        <rdfs:label rdf:datatype="&xsd;string">Heath</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;natural&quot;: &quot;heath&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#HerbalistShop -->
+
+    <owl:Class rdf:about="&osm_types;HerbalistShop">
+        <rdfs:label rdf:datatype="&xsd;string">Herbalist</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;herbalist&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Historic -->
+
+    <owl:Class rdf:about="&osm_types;Historic">
+        <rdfs:label rdf:datatype="&xsd;string">Historic</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;building&quot;: &quot;historic&quot;}, {&quot;building&quot;: &quot;yes&quot;, &quot;historic&quot;: &quot;building&quot;}, {&quot;historic&quot;: &quot;yes&quot;}]</rdfs:isDefinedBy>
+        <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#HistoricAttraction -->
+
+    <owl:Class rdf:about="&osm_types;HistoricAttraction">
+        <rdfs:label rdf:datatype="&xsd;string">Historic Attraction</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Historic"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;yes&quot;, &quot;historic&quot;: &quot;building&quot;, &quot;tourism&quot;: &quot;attraction&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#HistoricRailway -->
+
+    <owl:Class rdf:about="&osm_types;HistoricRailway">
+        <rdfs:label rdf:datatype="&xsd;string">Historic</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Rail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;railway&quot;: &quot;preserved&quot;, &quot;usage&quot;: &quot;tourism&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -395,12 +1609,141 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#HorseRiding -->
+
+    <owl:Class rdf:about="&osm_types;HorseRiding">
+        <rdfs:label rdf:datatype="&xsd;string">Horse</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;leisure&quot;: &quot;horse_riding&quot;}, {&quot;tourism&quot;: &quot;attraction&quot;, &quot;sport&quot;: &quot;equestrian&quot;}, {&quot;leisure&quot;: &quot;track&quot;, &quot;sport&quot;: &quot;horse_racing&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Hospital -->
+
+    <owl:Class rdf:about="&osm_types;Hospital">
+        <rdfs:label rdf:datatype="&xsd;string">Hospital</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Health"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;hospital&quot;}, {&quot;building&quot;: &quot;hospital&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Hostel -->
+
+    <owl:Class rdf:about="&osm_types;Hostel">
+        <rdfs:label rdf:datatype="&xsd;string">Hostel</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Accommodation"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;hostel&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Hotel -->
 
     <owl:Class rdf:about="&osm_types;Hotel">
         <rdfs:label rdf:datatype="&xsd;string">Hotel</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&osm_types;Commercial"/>
+        <rdfs:subClassOf rdf:resource="&osm_types;Accommodation"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;hotel&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Hut -->
+
+    <owl:Class rdf:about="&osm_types;Hut">
+        <rdfs:label rdf:datatype="&xsd;string">Hut</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;hut&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Industrial -->
+
+    <owl:Class rdf:about="&osm_types;Industrial">
+        <rdfs:label rdf:datatype="&xsd;string">Industrial</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;building&quot;: &quot;industrial&quot;}, {&quot;landuse&quot;: &quot;industrial&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#InformationBoard -->
+
+    <owl:Class rdf:about="&osm_types;InformationBoard">
+        <rdfs:label rdf:datatype="&xsd;string">Board</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;InformationObject"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;information&quot;, &quot;information&quot;: &quot;board&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#InformationObject -->
+
+    <owl:Class rdf:about="&osm_types;InformationObject">
+        <rdfs:label rdf:datatype="&xsd;string">Information</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#InformationOffice -->
+
+    <owl:Class rdf:about="&osm_types;InformationOffice">
+        <rdfs:label rdf:datatype="&xsd;string">Information Office</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;PublicBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;tourism&quot;: &quot;information&quot;, &quot;information&quot;: &quot;office&quot;}, {&quot;tourism&quot;: &quot;information&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#InteriorDecorator -->
+
+    <owl:Class rdf:about="&osm_types;InteriorDecorator">
+        <rdfs:label rdf:datatype="&xsd;string">Interior</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;interior_decoration&quot;}, {&quot;shop&quot;: &quot;carpet&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Jewelry -->
+
+    <owl:Class rdf:about="&osm_types;Jewelry">
+        <rdfs:label rdf:datatype="&xsd;string">Jewelry</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;jewelry&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Kindergarten -->
+
+    <owl:Class rdf:about="&osm_types;Kindergarten">
+        <rdfs:label rdf:datatype="&xsd;string">Kindergarten</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Education"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;kindergarten&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#KitchenShop -->
+
+    <owl:Class rdf:about="&osm_types;KitchenShop">
+        <rdfs:label rdf:datatype="&xsd;string">Kitchen</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;kitchen&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Lawyer -->
+
+    <owl:Class rdf:about="&osm_types;Lawyer">
+        <rdfs:label rdf:datatype="&xsd;string">Lawyer</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;office&quot;: &quot;lawyer&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -464,11 +1807,173 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Library -->
+
+    <owl:Class rdf:about="&osm_types;Library">
+        <rdfs:label rdf:datatype="&xsd;string">Library</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;PublicBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;library&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#LiquorStore -->
+
+    <owl:Class rdf:about="&osm_types;LiquorStore">
+        <rdfs:label rdf:datatype="&xsd;string">Drinks</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;alcohol&quot;}, {&quot;shop&quot;: &quot;beverages&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#LivingStreet -->
+
+    <owl:Class rdf:about="&osm_types;LivingStreet">
+        <rdfs:label rdf:datatype="&xsd;string">Living Street</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;living_street&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Location -->
+
+    <owl:Class rdf:about="&osm_types;Location">
+        <rdfs:label rdf:datatype="&xsd;string">Location</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Place"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;place&quot;: &quot;locality&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Marina -->
+
+    <owl:Class rdf:about="&osm_types;Marina">
+        <rdfs:label rdf:datatype="&xsd;string">Marina</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;marina&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Marketplace -->
+
+    <owl:Class rdf:about="&osm_types;Marketplace">
+        <rdfs:label rdf:datatype="&xsd;string">Marketplace</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Commercial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;marketplace&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Meadow -->
+
+    <owl:Class rdf:about="&osm_types;Meadow">
+        <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;meadow&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Megalith -->
+
+    <owl:Class rdf:about="&osm_types;Megalith">
+        <rdfs:label rdf:datatype="&xsd;string">Megalith</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;ArchaeologicalSite"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;historic&quot;: &quot;archaeological_site&quot;, &quot;site_type&quot;: &quot;megalith&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;historic&quot;: &quot;archeological_site&quot;, &quot;site_type&quot;: &quot;megalith&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Memorial -->
+
+    <owl:Class rdf:about="&osm_types;Memorial">
+        <rdfs:label rdf:datatype="&xsd;string">Memorial</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;historic&quot;: &quot;memorial&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#MilitaryBuilding -->
+
+    <owl:Class rdf:about="&osm_types;MilitaryBuilding">
+        <rdfs:label rdf:datatype="&xsd;string">Military</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;military&quot;}</rdfs:isDefinedBy>
+        <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#MobilePhoneShop -->
+
+    <owl:Class rdf:about="&osm_types;MobilePhoneShop">
+        <rdfs:label rdf:datatype="&xsd;string">Mobile Phone</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;mobile_phone&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Monument -->
+
+    <owl:Class rdf:about="&osm_types;Monument">
+        <rdfs:label rdf:datatype="&xsd;string">Monument</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;historic&quot;: &quot;monument&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Motel -->
+
+    <owl:Class rdf:about="&osm_types;Motel">
+        <rdfs:label rdf:datatype="&xsd;string">Motel</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Accommodation"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;motel&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Motorway -->
+
+    <owl:Class rdf:about="&osm_types;Motorway">
+        <rdfs:label rdf:datatype="&xsd;string">Motorway</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;motorway&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#MotorwayJunction -->
+
+    <owl:Class rdf:about="&osm_types;MotorwayJunction">
+        <rdfs:label rdf:datatype="&xsd;string">Motorway Junction</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;motorway_junction&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Mountain -->
 
     <owl:Class rdf:about="&osm_types;Mountain">
         <rdfs:label rdf:datatype="&xsd;string">Mountain</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;natural&quot;: &quot;mountain_range&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#MudFlat -->
+
+    <owl:Class rdf:about="&osm_types;MudFlat">
+        <rdfs:label>Mud Flat</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
+        <rdfs:isDefinedBy>{&quot;natural&quot;: &quot;mud&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -479,6 +1984,26 @@
         <rdfs:label rdf:datatype="&xsd;string">Museum</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;museum&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#MusicShop -->
+
+    <owl:Class rdf:about="&osm_types;MusicShop">
+        <rdfs:label>Music</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy>{&quot;shop&quot;: &quot;music&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#NarrowGaugeRailway -->
+
+    <owl:Class rdf:about="&osm_types;NarrowGaugeRailway">
+        <rdfs:label rdf:datatype="&xsd;string">Narrow Gauge</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Rail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;railway&quot;: &quot;narrow_gauge&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -512,6 +2037,46 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Newsagent -->
+
+    <owl:Class rdf:about="&osm_types;Newsagent">
+        <rdfs:label rdf:datatype="&xsd;string">Newsagent</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;newsagent&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Newspaper -->
+
+    <owl:Class rdf:about="&osm_types;Newspaper">
+        <rdfs:label rdf:datatype="&xsd;string">Newspaper</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;OfficeBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;office&quot;: &quot;newspaper&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Nightclub -->
+
+    <owl:Class rdf:about="&osm_types;Nightclub">
+        <rdfs:label>Nightclub</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy>{&quot;amenity&quot;: &quot;nightclub&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Nursery -->
+
+    <owl:Class rdf:about="&osm_types;Nursery">
+        <rdfs:label rdf:datatype="&xsd;string">Nursery</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Education"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;nursery&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#OSM -->
 
     <owl:Class rdf:about="&osm_types;OSM"/>
@@ -523,6 +2088,36 @@
     <owl:Class rdf:about="&osm_types;Object">
         <rdfs:label rdf:datatype="&xsd;string">Object</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Artificial_Feature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#OfficeBuilding -->
+
+    <owl:Class rdf:about="&osm_types;OfficeBuilding">
+        <rdfs:label rdf:datatype="&xsd;string">Office</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Commercial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;office&quot;: &quot;company&quot;}, {&quot;office&quot;: &quot;coworking&quot;}, {&quot;building&quot;: &quot;office&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Optician -->
+
+    <owl:Class rdf:about="&osm_types;Optician">
+        <rdfs:label rdf:datatype="&xsd;string">Optician</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Health"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;optician&quot;}, {&quot;amenity&quot;: &quot;optometrist&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#OutdoorShop -->
+
+    <owl:Class rdf:about="&osm_types;OutdoorShop">
+        <rdfs:label rdf:datatype="&xsd;string">Outdoor Shop</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;outdoor&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -566,11 +2161,71 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#PetShop -->
+
+    <owl:Class rdf:about="&osm_types;PetShop">
+        <rdfs:label rdf:datatype="&xsd;string">Pet</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;pet&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Pharmacy -->
+
+    <owl:Class rdf:about="&osm_types;Pharmacy">
+        <rdfs:label rdf:datatype="&xsd;string">Pharmacy</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Health"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;pharmacy&quot;}, {&quot;shop&quot;: &quot;chemist&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Place -->
 
     <owl:Class rdf:about="&osm_types;Place">
         <rdfs:label rdf:datatype="&xsd;string">Place</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;OSM"/>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#PlaceOfWorship -->
+
+    <owl:Class rdf:about="&osm_types;PlaceOfWorship">
+        <rdfs:label rdf:datatype="&xsd;string">Place of Worship</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;PublicBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;place_of_worship&quot;}, {&quot;building&quot;: &quot;chapel&quot;}, {&quot;building&quot;: &quot;church&quot;}, {&quot;amenity&quot;: &quot;convent&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Playground -->
+
+    <owl:Class rdf:about="&osm_types;Playground">
+        <rdfs:label rdf:datatype="&xsd;string">Playground</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Park"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;playground&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#PlayingField -->
+
+    <owl:Class rdf:about="&osm_types;PlayingField">
+        <rdfs:label rdf:datatype="&xsd;string">Playing Field</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;leisure&quot;: &quot;pitch&quot;, &quot;surface&quot;: &quot;grass&quot;}, {&quot;leisure&quot;: &quot;pitch&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Plumber -->
+
+    <owl:Class rdf:about="&osm_types;Plumber">
+        <rdfs:label>Plumber</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy>{&quot;craft&quot;: &quot;plumber&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -585,12 +2240,62 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#PostDepot -->
+
+    <owl:Class rdf:about="&osm_types;PostDepot">
+        <rdfs:label rdf:datatype="&xsd;string">Post Depot</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Industrial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;post_depot&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#PostOffice -->
+
+    <owl:Class rdf:about="&osm_types;PostOffice">
+        <rdfs:label rdf:datatype="&xsd;string">Post Office</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;post_office&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#PrimaryRoad -->
 
     <owl:Class rdf:about="&osm_types;PrimaryRoad">
         <rdfs:label rdf:datatype="&xsd;string">Primary</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;primary&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;highway&quot;: &quot;primary&quot;}, {&quot;highway&quot;: &quot;primary_link&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Prison -->
+
+    <owl:Class rdf:about="&osm_types;Prison">
+        <rdfs:label rdf:datatype="&xsd;string">Prison</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;PublicBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;prison&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#PrivateArea -->
+
+    <owl:Class rdf:about="&osm_types;PrivateArea">
+        <rdfs:label rdf:datatype="&xsd;string">Private</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Area"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;access&quot;: &quot;private&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#PrivateTrack -->
+
+    <owl:Class rdf:about="&osm_types;PrivateTrack">
+        <rdfs:label rdf:datatype="&xsd;string">Private</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Track"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;track&quot;, &quot;access&quot;: &quot;private&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -610,6 +2315,7 @@
     <owl:Class rdf:about="&osm_types;PublicBuilding">
         <rdfs:label rdf:datatype="&xsd;string">Public</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;public_building&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -623,11 +2329,53 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Quarry -->
+
+    <owl:Class rdf:about="&osm_types;Quarry">
+        <rdfs:label rdf:datatype="&xsd;string">Quarry</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Industrial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;quarry&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#RacingTrack -->
+
+    <owl:Class rdf:about="&osm_types;RacingTrack">
+        <rdfs:label rdf:datatype="&xsd;string">Racing Track</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;raceway&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Rail -->
 
     <owl:Class rdf:about="&osm_types;Rail">
         <rdfs:label rdf:datatype="&xsd;string">Railway</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Transport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;railway&quot;}</rdfs:isDefinedBy>
+        <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#RailwayBridge -->
+
+    <owl:Class rdf:about="&osm_types;RailwayBridge">
+        <rdfs:label rdf:datatype="&xsd;string">Bridge</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Rail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;railway&quot;: &quot;rail&quot;, &quot;bridge&quot;: &quot;yes&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#RailwayJunction -->
+
+    <owl:Class rdf:about="&osm_types;RailwayJunction">
+        <rdfs:label rdf:datatype="&xsd;string">Junction</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Rail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;railway&quot;: &quot;junction&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -642,6 +2390,36 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#RailwayTunnel -->
+
+    <owl:Class rdf:about="&osm_types;RailwayTunnel">
+        <rdfs:label rdf:datatype="&xsd;string">Tunnel</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Rail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;railway&quot;: &quot;rail&quot;, &quot;tunnel&quot;: &quot;yes&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Reception -->
+
+    <owl:Class rdf:about="&osm_types;Reception">
+        <rdfs:label rdf:datatype="&xsd;string">Reception</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;OfficeBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;reception_area&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#RecreationGround -->
+
+    <owl:Class rdf:about="&osm_types;RecreationGround">
+        <rdfs:label rdf:datatype="&xsd;string">Recreation Ground</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;recreation_ground&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Recreation_Ground -->
 
     <owl:Class rdf:about="&osm_types;Recreation_Ground">
@@ -652,11 +2430,43 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Recycling -->
+
+    <owl:Class rdf:about="&osm_types;Recycling">
+        <rdfs:label rdf:datatype="&xsd;string">Recycling</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;PublicBuilding"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;recycling&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Reservoir -->
+
+    <owl:Class rdf:about="&osm_types;Reservoir">
+        <rdfs:label rdf:datatype="&xsd;string">Reservoir</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;StandingWater"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;landuse&quot;: &quot;reservoir&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Residential -->
 
     <owl:Class rdf:about="&osm_types;Residential">
         <rdfs:label rdf:datatype="&xsd;string">Residential</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;landuse&quot;: &quot;residential&quot;}, {&quot;building&quot;: &quot;residential&quot;}]</rdfs:isDefinedBy>
+        <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ResidentialHouse -->
+
+    <owl:Class rdf:about="&osm_types;ResidentialHouse">
+        <rdfs:label rdf:datatype="&xsd;string">House</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Residential"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;house&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -681,11 +2491,113 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Retail -->
+
+    <owl:Class rdf:about="&osm_types;Retail">
+        <rdfs:label rdf:datatype="&xsd;string">Retail</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Commercial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;building&quot;: &quot;retail&quot;}, {&quot;landuse&quot;: &quot;retail&quot;}, {&quot;shop&quot;: &quot;yes&quot;}]</rdfs:isDefinedBy>
+        <extra_settings rdf:datatype="&xsd;string">{&quot;warn&quot;: true}</extra_settings>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#River -->
+
+    <owl:Class rdf:about="&osm_types;River">
+        <rdfs:label rdf:datatype="&xsd;string">River</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Flowing_Water"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;waterway&quot;: &quot;river&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Riverbank -->
+
+    <owl:Class rdf:about="&osm_types;Riverbank">
+        <rdfs:label rdf:datatype="&xsd;string">Riverbank</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Flowing_Water"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;waterway&quot;: &quot;riverbank&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Road -->
 
     <owl:Class rdf:about="&osm_types;Road">
         <rdfs:label rdf:datatype="&xsd;string">Road</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Transport"/>
+        <rdfs:isDefinedBy>{&quot;highway&quot;: &quot;road&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#RoadUnderConstruction -->
+
+    <owl:Class rdf:about="&osm_types;RoadUnderConstruction">
+        <rdfs:label rdf:datatype="&xsd;string">Under Construction</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;construction&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Rock -->
+
+    <owl:Class rdf:about="&osm_types;Rock">
+        <rdfs:label rdf:datatype="&xsd;string">Rock</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Natural_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;seamark:type&quot;: &quot;rock&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Rugby -->
+
+    <owl:Class rdf:about="&osm_types;Rugby">
+        <rdfs:label rdf:datatype="&xsd;string">Rugby</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;sport&quot;: &quot;rugby&quot;}, {&quot;leisure&quot;: &quot;pitch&quot;, &quot;sport&quot;: &quot;rugby_union&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Ruins -->
+
+    <owl:Class rdf:about="&osm_types;Ruins">
+        <rdfs:label rdf:datatype="&xsd;string">Ruins</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Historic"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;historic&quot;: &quot;ruins&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Runway -->
+
+    <owl:Class rdf:about="&osm_types;Runway">
+        <rdfs:label rdf:datatype="&xsd;string">Runway</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;AirTransport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;aeroway&quot;: &quot;runway&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#SailingClub -->
+
+    <owl:Class rdf:about="&osm_types;SailingClub">
+        <rdfs:label rdf:datatype="&xsd;string">Sailing Club</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;club&quot;: &quot;sailing&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Salon -->
+
+    <owl:Class rdf:about="&osm_types;Salon">
+        <rdfs:label rdf:datatype="&xsd;string">Salon</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;salon&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -695,7 +2607,7 @@
     <owl:Class rdf:about="&osm_types;School">
         <rdfs:label rdf:datatype="&xsd;string">School</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Education"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;school&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;school&quot;}, {&quot;building&quot;: &quot;school&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -715,7 +2627,7 @@
     <owl:Class rdf:about="&osm_types;SecondaryRoad">
         <rdfs:label rdf:datatype="&xsd;string">Secondary</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;secondary&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;highway&quot;: &quot;secondary&quot;}, {&quot;highway&quot;: &quot;secondary_link&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -748,12 +2660,100 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#ShoeShop -->
+
+    <owl:Class rdf:about="&osm_types;ShoeShop">
+        <rdfs:label rdf:datatype="&xsd;string">Shoe</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;shoes&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Shoemaker -->
+
+    <owl:Class rdf:about="&osm_types;Shoemaker">
+        <rdfs:label rdf:datatype="&xsd;string">Shoemaker</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;craft&quot;: &quot;shoemaker&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Sport -->
+
+    <owl:Class rdf:about="&osm_types;Sport">
+        <rdfs:label rdf:datatype="&xsd;string">Sport</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#SportsCentre -->
 
     <owl:Class rdf:about="&osm_types;SportsCentre">
-        <rdfs:label rdf:datatype="&xsd;string">Sports Centre</rdfs:label>
-        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:label rdf:datatype="&xsd;string">Centre</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Sport"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;leisure&quot;: &quot;sports_centre&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#SportsShop -->
+
+    <owl:Class rdf:about="&osm_types;SportsShop">
+        <rdfs:label rdf:datatype="&xsd;string">Sports</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;sports&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Spring -->
+
+    <owl:Class rdf:about="&osm_types;Spring">
+        <rdfs:label rdf:datatype="&xsd;string">Spring</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Flowing_Water"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;natural&quot;: &quot;spring&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#StandingWater -->
+
+    <owl:Class rdf:about="&osm_types;StandingWater">
+        <rdfs:label rdf:datatype="&xsd;string">Standing Water</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Water_Way"/>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Station -->
+
+    <owl:Class rdf:about="&osm_types;Station">
+        <rdfs:label rdf:datatype="&xsd;string">Station</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Rail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;railway&quot;: &quot;stop&quot;}, {&quot;railway&quot;: &quot;station&quot;}, {&quot;railway&quot;: &quot;halt&quot;}, {&quot;railway&quot;: &quot;station_site&quot;}, {&quot;railway&quot;: &quot;subway_entrance&quot;}, {&quot;railway&quot;: &quot;stopping_point&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Stationery -->
+
+    <owl:Class rdf:about="&osm_types;Stationery">
+        <rdfs:label rdf:datatype="&xsd;string">Stationery</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;stationery&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#SteeplechaseJump -->
+
+    <owl:Class rdf:about="&osm_types;SteeplechaseJump">
+        <rdfs:label rdf:datatype="&xsd;string">Steeplechase Jump</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;barrier&quot;: &quot;steeplechase_jump&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -783,7 +2783,67 @@
     <owl:Class rdf:about="&osm_types;Supermarket">
         <rdfs:label rdf:datatype="&xsd;string">Supermarket</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Food_And_Drink"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;building&quot;: &quot;yes&quot;, &quot;shop&quot;: &quot;supermarket&quot;}, {&quot;building&quot;: &quot;yes&quot;, &quot;amenity&quot;: &quot;supermarket&quot;}]</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;building&quot;: &quot;yes&quot;, &quot;shop&quot;: &quot;supermarket&quot;}, {&quot;building&quot;: &quot;yes&quot;, &quot;amenity&quot;: &quot;supermarket&quot;}, {&quot;shop&quot;: &quot;supermarket&quot;}, {&quot;building&quot;: &quot;supermarket&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#SurveyPoint -->
+
+    <owl:Class rdf:about="&osm_types;SurveyPoint">
+        <rdfs:label rdf:datatype="&xsd;string">Survey Point</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;man_made&quot;: &quot;survey_point&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Tailor -->
+
+    <owl:Class rdf:about="&osm_types;Tailor">
+        <rdfs:label>Tailor</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy>{&quot;shop&quot;: &quot;tailor&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#TaxiStand -->
+
+    <owl:Class rdf:about="&osm_types;TaxiStand">
+        <rdfs:label rdf:datatype="&xsd;string">Taxi Stand</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Parking"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;taxi&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Taxiway -->
+
+    <owl:Class rdf:about="&osm_types;Taxiway">
+        <rdfs:label rdf:datatype="&xsd;string">Taxiway</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;AirTransport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;aeroway&quot;: &quot;taxiway&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Telephone -->
+
+    <owl:Class rdf:about="&osm_types;Telephone">
+        <rdfs:label>Telephone</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy>{&quot;amenity&quot;: &quot;telephone&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#TerracedHouse -->
+
+    <owl:Class rdf:about="&osm_types;TerracedHouse">
+        <rdfs:label rdf:datatype="&xsd;string">Terrace</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;ResidentialHouse"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;terrace&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -793,7 +2853,17 @@
     <owl:Class rdf:about="&osm_types;TertiaryRoad">
         <rdfs:label rdf:datatype="&xsd;string">Tertiary</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;tertiary&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;highway&quot;: &quot;tertiary&quot;}, {&quot;highway&quot;: &quot;tertiary_link&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Theatre -->
+
+    <owl:Class rdf:about="&osm_types;Theatre">
+        <rdfs:label rdf:datatype="&xsd;string">Theatre</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;theatre&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -808,6 +2878,56 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#Tower -->
+
+    <owl:Class rdf:about="&osm_types;Tower">
+        <rdfs:label rdf:datatype="&xsd;string">Tower</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Building"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;man_made&quot;: &quot;tower&quot;}, {&quot;building&quot;: &quot;tower&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Town -->
+
+    <owl:Class rdf:about="&osm_types;Town">
+        <rdfs:label rdf:datatype="&xsd;string">Town</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Place"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;place&quot;: &quot;town&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#ToyShop -->
+
+    <owl:Class rdf:about="&osm_types;ToyShop">
+        <rdfs:label rdf:datatype="&xsd;string">Toy</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;toy&quot;}, {&quot;shop&quot;: &quot;toys&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Track -->
+
+    <owl:Class rdf:about="&osm_types;Track">
+        <rdfs:label rdf:datatype="&xsd;string">Track</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;track&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Trade -->
+
+    <owl:Class rdf:about="&osm_types;Trade">
+        <rdfs:label rdf:datatype="&xsd;string">Trade</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;trade&quot;}, {&quot;shop&quot;: &quot;builders_merchants&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Transport -->
 
     <owl:Class rdf:about="&osm_types;Transport">
@@ -817,12 +2937,22 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#TravelAgency -->
+
+    <owl:Class rdf:about="&osm_types;TravelAgency">
+        <rdfs:label rdf:datatype="&xsd;string">Travel Agency</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Service"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;travel_agency&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#TrunkRoad -->
 
     <owl:Class rdf:about="&osm_types;TrunkRoad">
         <rdfs:label rdf:datatype="&xsd;string">Trunk</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Road"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;highway&quot;: &quot;trunk&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;highway&quot;: &quot;trunk&quot;}, {&quot;highway&quot;: &quot;trunk_link&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -837,12 +2967,82 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#UndergroundBuilding -->
+
+    <owl:Class rdf:about="&osm_types;UndergroundBuilding">
+        <rdfs:label rdf:datatype="&xsd;string">Underground</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Artificial_Feature"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;structures_below_ground&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#University -->
+
+    <owl:Class rdf:about="&osm_types;University">
+        <rdfs:label rdf:datatype="&xsd;string">University</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Education"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;building&quot;: &quot;university&quot;}, {&quot;amenity&quot;: &quot;university&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#VarietyStore -->
+
+    <owl:Class rdf:about="&osm_types;VarietyStore">
+        <rdfs:label rdf:datatype="&xsd;string">Variety Store</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;shop&quot;: &quot;variety_store&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Veterinary -->
+
+    <owl:Class rdf:about="&osm_types;Veterinary">
+        <rdfs:label rdf:datatype="&xsd;string">Vetinary</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Health"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;amenity&quot;: &quot;vetinary&quot;}, {&quot;amenity&quot;: &quot;veterinary&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Viewpoint -->
+
+    <owl:Class rdf:about="&osm_types;Viewpoint">
+        <rdfs:label rdf:datatype="&xsd;string">Viewpoint</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Place"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;viewpoint&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Village -->
 
     <owl:Class rdf:about="&osm_types;Village">
         <rdfs:label rdf:datatype="&xsd;string">Village</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Place"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;place&quot;: &quot;village&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Wall -->
+
+    <owl:Class rdf:about="&osm_types;Wall">
+        <rdfs:label>Wall</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Object"/>
+        <rdfs:isDefinedBy>{&quot;barrier&quot;: &quot;wall&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#WarehouseBuilding -->
+
+    <owl:Class rdf:about="&osm_types;WarehouseBuilding">
+        <rdfs:label rdf:datatype="&xsd;string">Warehouse</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Industrial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;warehouse&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -858,11 +3058,61 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#WaterTower -->
+
+    <owl:Class rdf:about="&osm_types;WaterTower">
+        <rdfs:label rdf:datatype="&xsd;string">Water Tower</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Agricultural"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;man_made&quot;: &quot;water_tower&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#WaterViaduct -->
+
+    <owl:Class rdf:about="&osm_types;WaterViaduct">
+        <rdfs:label rdf:datatype="&xsd;string">Viaduct</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;ArtificialFlowingWater"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;waterway&quot;: &quot;viaduct&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#WaterWorks -->
+
+    <owl:Class rdf:about="&osm_types;WaterWorks">
+        <rdfs:label rdf:datatype="&xsd;string">Water Works</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Industrial"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;man_made&quot;: &quot;water_works&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Water_Way -->
 
     <owl:Class rdf:about="&osm_types;Water_Way">
         <rdfs:label rdf:datatype="&xsd;string">Water Way</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Transport"/>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Waterfall -->
+
+    <owl:Class rdf:about="&osm_types;Waterfall">
+        <rdfs:label rdf:datatype="&xsd;string">Waterfall</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Flowing_Water"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;waterway&quot;: &quot;waterfall&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#Zoo -->
+
+    <owl:Class rdf:about="&osm_types;Zoo">
+        <rdfs:label rdf:datatype="&xsd;string">Zoo</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Leisure"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;tourism&quot;: &quot;zoo&quot;}</rdfs:isDefinedBy>
     </owl:Class>
 </rdf:RDF>
 
