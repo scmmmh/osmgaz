@@ -25,23 +25,23 @@ class OSMGaz(object):
         containment hierarchy. The proximal toponyms are in a random order.
         """
         def format_topo(toponym, classification, name_salience=None, type_salience=None):
-            data = {'name': toponym.name,
-                    'geometry': wkb.dumps(to_shape(toponym.way)),
-                    'type': classification['type']}
+            data = {'dc_title': toponym.name,
+                    'osm_geometry': wkb.dumps(to_shape(toponym.way)),
+                    'dc_type': classification['type']}
             if name_salience is not None or type_salience is not None:
-                data['salience'] = {}
+                data['osm_salience'] = {}
                 if name_salience is not None:
-                    data['salience']['name'] = name_salience
+                    data['osm_salience']['name'] = name_salience
                 if type_salience is not None:
-                    data['salience']['type'] = type_salience
+                    data['osm_salience']['type'] = type_salience
             return data
         containment = self.containment_gaz(point)
         filtered_containment = self.containment_filter(containment)
         proximal = self.proximal_gaz(point, filtered_containment)
         filtered_proximal = self.proximal_filter(proximal, point, containment)
         
-        return {'containment': [format_topo(t, c) for (t, c) in filtered_containment],
-                'proximal': [format_topo(t, c, self.name_salience_calculator(t, filtered_containment), self.type_salience_calculator(c, filtered_containment))
+        return {'osm_containment': [format_topo(t, c) for (t, c) in filtered_containment],
+                'osm_proximal': [format_topo(t, c, self.name_salience_calculator(t, filtered_containment), self.type_salience_calculator(c, filtered_containment))
                              for (t, c) in filtered_proximal]}
 
 
