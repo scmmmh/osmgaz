@@ -8,6 +8,7 @@ which are returned as a list. An empty list means nothing matched
 import json
 
 from copy import deepcopy
+from pkg_resources import resource_stream
 from rdflib import Graph, URIRef
 from rdflib.namespace import RDFS
 from sqlalchemy import create_engine, and_
@@ -55,7 +56,7 @@ class ToponymClassifier(object):
                     print(definition)
         self.rules = []
         ontology = Graph()
-        ontology.load('src/osmgaz/rules.rdf')
+        ontology.load(resource_stream('osmgaz', 'rules.rdf'))
         parse_tree(URIRef('http://work.room3b.eu/ontology/osm_types#OSM'), ontology, [])
         self.rules.sort(key=lambda r: (len(r['rules']), len(r['type'])), reverse=True)
         
