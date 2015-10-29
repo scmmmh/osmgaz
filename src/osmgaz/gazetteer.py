@@ -8,8 +8,9 @@ from sqlalchemy.orm import sessionmaker
 from geoalchemy2 import WKTElement
 from pyproj import Proj
 
-from .models import Polygon, Line, Point
 from .classifier import ToponymClassifier
+from .filters import type_match
+from .models import Polygon, Line, Point
 
 class Gazetteer(object):
     """Generic Gazetteer object that creates the database connection.
@@ -58,7 +59,8 @@ class ProximalGazetteer(Gazetteer):
     
     def __call__(self, point, containment):
         coords = self.proj(*point)
-        for dist in [400, 3000]:
+        toponyms = []
+        for dist in [400, 1000, 2000, 3000]:
             toponyms = []
             for toponym, classification in self.query(self.session.query(Polygon).filter(and_(Polygon.name != '',
                                                                                               Polygon.way.ST_DWithin(WKTElement('POINT(%f %f)' % coords,
@@ -75,6 +77,11 @@ class ProximalGazetteer(Gazetteer):
                                                                                                                             srid=900913),
                                                                                                                  dist)))):
                 toponyms.append((toponym, classification))
-            if toponyms:
-                return toponyms
-        return []
+            if dist == 400:
+                for _, type_ in toponyms:
+                    if type_match(type_['type'], ['ARTIFICIAL FEATURE', 'BUILDING']):
+                        return toponyms
+            else:
+                if len(toponyms) > 10:
+                    return toponyms
+        return toponyms

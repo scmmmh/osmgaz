@@ -29,7 +29,7 @@ def main():
         filtered_containment = containment_filter(containment)
         print(', '.join([t.name for t, _ in filtered_containment]))
         # Find any unclassified toponyms
-        for pnt in name_salience_calculator.session.query(Point).filter(and_(Point.name != '',
+        """for pnt in name_salience_calculator.session.query(Point).filter(and_(Point.name != '',
                                                                                Point.classification == None,
                                                                                Point.way.ST_DWithin(filtered_containment[0][0].way, 400))):
             classification = type_salience_calculator.classifier(pnt)
@@ -47,7 +47,7 @@ def main():
             classification = type_salience_calculator.classifier(polygon)
             if classification:
                 polygon.classification = '::'.join(classification['type'])
-        name_salience_calculator.session.commit()
+        name_salience_calculator.session.commit()"""
         #####
         proximal = proximal_gaz(point, filtered_containment)
         filtered_proximal = proximal_filter(proximal, point, containment)
