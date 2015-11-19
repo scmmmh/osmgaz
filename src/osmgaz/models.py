@@ -3,7 +3,7 @@ u"""
 
 .. moduleauthor:: Mark Hall <mark.hall@mail.room3b.eu>
 """
-from sqlalchemy import Column, Integer, Numeric, Unicode
+from sqlalchemy import Column, Integer, Numeric, Unicode, UnicodeText
 from sqlalchemy.dialects.postgresql import HSTORE
 from sqlalchemy.ext.declarative import declarative_base
 from geoalchemy2 import Geometry
@@ -70,3 +70,12 @@ class TypeSalienceCache(Base):
     toponym_type = Column(Unicode(255))
     container_id = Column(Integer)
     salience = Column(Numeric)
+
+
+class LookupCache(Base):
+    
+    __tablename__ = 'lookup_cache'
+    
+    id = Column(Integer, primary_key=True)
+    point = Column(Unicode(255))
+    data = Column(UnicodeText)

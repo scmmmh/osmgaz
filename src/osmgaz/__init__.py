@@ -1,17 +1,26 @@
-from sqlalchemy import and_
+import base64
+import json
+
+from copy import deepcopy
 from geoalchemy2.shape import to_shape
-from shapely import wkb
+from shapely import wkt
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from .gazetteer import ContainmentGazetteer, ProximalGazetteer
 from .filters import ContainmentFilter, ProximalFilter
 from .classifier import NameSalienceCalculator, TypeSalienceCalculator
-from .models import Point, Line, Polygon
+from .models import LookupCache
+
 
 class OSMGaz(object):
     """Main interface object, handles the full gazetteer pipeline.
     """
 
     def __init__(self, sqlalchemy_uri):
+        engine = create_engine(sqlalchemy_uri)
+        Session = sessionmaker(bind=engine)
+        self.session = Session()
         self.containment_gaz = ContainmentGazetteer(sqlalchemy_uri)
         self.containment_filter = ContainmentFilter(self.containment_gaz)
         self.proximal_gaz = ProximalGazetteer(sqlalchemy_uri)
@@ -19,6 +28,31 @@ class OSMGaz(object):
         self.name_salience_calculator = NameSalienceCalculator(sqlalchemy_uri)
         self.type_salience_calculator = TypeSalienceCalculator(sqlalchemy_uri)
 
+    def load(self, point):
+        cache = self.session.query(LookupCache).filter(LookupCache.point == '%.5f::%.5f' % point).first()
+        if cache:
+            data = json.loads(cache.data)
+            return data
+        return None
+    
+    def save(self, point, data):
+        data = deepcopy(data)
+        for toponym in data['osm_containment']:
+            if 'osm_salience' in toponym:
+                if 'name' in toponym['osm_salience']:
+                    toponym['osm_salience']['name'] = float(toponym['osm_salience']['name'])
+                if 'type' in toponym['osm_salience']:
+                    toponym['osm_salience']['type'] = float(toponym['osm_salience']['type'])
+        for toponym in data['osm_proximal']:
+            if 'osm_salience' in toponym:
+                if 'name' in toponym['osm_salience']:
+                    toponym['osm_salience']['name'] = float(toponym['osm_salience']['name'])
+                if 'type' in toponym['osm_salience']:
+                    toponym['osm_salience']['type'] = float(toponym['osm_salience']['type'])
+        self.session.add(LookupCache(point='%.5f::%.5f' % point,
+                                     data=json.dumps(data)))
+        self.session.commit()
+    
     def __call__(self, point):
         """Run the gazetteer pipeline for a single point. Returns a dictionary with
         containment and proximal toponyms. The containment toponyms are sorted by
@@ -26,7 +60,7 @@ class OSMGaz(object):
         """
         def format_topo(toponym, classification, name_salience=None, type_salience=None):
             data = {'dc_title': toponym.name,
-                    'osm_geometry': wkb.dumps(to_shape(toponym.way)),
+                    'osm_geometry': wkt.dumps(to_shape(toponym.way)),
                     'dc_type': classification['type']}
             if name_salience is not None or type_salience is not None:
                 data['osm_salience'] = {}
@@ -35,14 +69,19 @@ class OSMGaz(object):
                 if type_salience is not None:
                     data['osm_salience']['type'] = type_salience
             return data
-        containment = self.containment_gaz(point)
-        filtered_containment = self.containment_filter(containment)
-        proximal = self.proximal_gaz(point, filtered_containment)
-        filtered_proximal = self.proximal_filter(proximal, point, containment)
-        
-        return {'osm_containment': [format_topo(t, c) for (t, c) in filtered_containment],
-                'osm_proximal': [format_topo(t, c, self.name_salience_calculator(t, filtered_containment), self.type_salience_calculator(c, filtered_containment))
-                             for (t, c) in filtered_proximal]}
+        cache = self.load(point)
+        if cache:
+            return cache
+        else:
+            containment = self.containment_gaz(point)
+            filtered_containment = self.containment_filter(containment)
+            proximal = self.proximal_gaz(point, filtered_containment)
+            filtered_proximal = self.proximal_filter(proximal, point, containment)
+            data = {'osm_containment': [format_topo(t, c) for (t, c) in filtered_containment],
+                    'osm_proximal': [format_topo(t, c, self.name_salience_calculator(t, filtered_containment), self.type_salience_calculator(c, filtered_containment))
+                                     for (t, c) in filtered_proximal]}
+            self.save(point, data)
+            return data
 
 
 def main():
