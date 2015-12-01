@@ -6,6 +6,7 @@ which are returned as a list. An empty list means nothing matched
 .. moduleauthor:: Mark Hall <mark.hall@mail.room3b.eu>
 """
 import json
+import logging
 
 from copy import deepcopy
 from pkg_resources import resource_stream
@@ -54,6 +55,7 @@ class ToponymClassifier(object):
                                 self.rules.append(rule)
                 except:
                     print(definition)
+        logging.debug('Loading classification rules')
         self.rules = []
         ontology = Graph()
         ontology.load(resource_stream('osmgaz', 'rules.rdf'))
@@ -106,6 +108,7 @@ class ToponymClassifier(object):
     def __call__(self, toponym):
         """Apply the classification rules to the given toponym.
         """
+        logging.debug('Classifying %s' % toponym.name)
         for rule in self.rules:
             matches = True
             for key, value in rule['rules'].items():
@@ -132,6 +135,7 @@ class NameSalienceCalculator(object):
         self.session = Session()
 
     def __call__(self, toponym, containers):
+        logging.debug('Calculating name salience for %s in %s' % (toponym.name, containers[0][0].name))
         cache = self.session.query(NameSalienceCache).filter(and_(NameSalienceCache.category == type(toponym).__name__,
                                                                   NameSalienceCache.toponym_id == toponym.gid,
                                                                   NameSalienceCache.container_id == containers[0][0].gid)).first()
@@ -166,6 +170,7 @@ class TypeSalienceCalculator(object):
 
     def __call__(self, type_, containers):
         type_ = '::'.join(type_['type'])
+        logging.debug('Calculating type salience for %s in %s' % (type_, containers[0][0].name))
         cache = self.session.query(TypeSalienceCache).filter(and_(TypeSalienceCache.toponym_type == type_,
                                                                   TypeSalienceCache.container_id == containers[0][0].gid)).first()
         if cache:

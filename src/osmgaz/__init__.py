@@ -1,5 +1,6 @@
 import base64
 import json
+import logging
 
 from copy import deepcopy
 from geoalchemy2.shape import to_shape
@@ -73,8 +74,10 @@ class OSMGaz(object):
         if cache:
             return cache
         else:
+            logging.info('Processing containment toponyms')
             containment = self.containment_gaz(point)
             filtered_containment = self.containment_filter(containment)
+            logging.info('Processing proximal toponyms')
             proximal = self.proximal_gaz(point, filtered_containment)
             filtered_proximal = self.proximal_filter(proximal, point, containment)
             data = {'osm_containment': [format_topo(t, c) for (t, c) in filtered_containment],

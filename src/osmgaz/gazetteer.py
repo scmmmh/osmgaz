@@ -3,6 +3,8 @@ u"""
 
 .. moduleauthor:: Mark Hall <mark.hall@mail.room3b.eu>
 """
+import logging
+
 from sqlalchemy import create_engine, and_
 from sqlalchemy.orm import sessionmaker
 from geoalchemy2 import WKTElement
@@ -45,6 +47,7 @@ class ContainmentGazetteer(Gazetteer):
     def __call__(self, point):
         """Retrieves the full containment hierarchy for the point (WGS84 lon/lat).
         """
+        logging.info('Retrieving containment toponyms for %.5f,%.5f' % point)
         coords = self.proj(*point)
         toponyms = self.query(self.session.query(Polygon).filter(and_(Polygon.name != '',
                                                                       Polygon.way.ST_Contains(WKTElement('POINT(%f %f)' % coords,
@@ -58,9 +61,11 @@ class ProximalGazetteer(Gazetteer):
     """
     
     def __call__(self, point, containment):
+        logging.info('Retrieving proximal toponyms for %.5f,%.5f' % point)
         coords = self.proj(*point)
         toponyms = []
         for dist in [400, 1000, 2000, 3000]:
+            logging.debug('Querying within %im' % dist)
             toponyms = []
             for toponym, classification in self.query(self.session.query(Polygon).filter(and_(Polygon.name != '',
                                                                                               Polygon.way.ST_DWithin(WKTElement('POINT(%f %f)' % coords,
