@@ -102,8 +102,10 @@ class ToponymClassifier(object):
             if tags not in self.unknown:
                 if match_tags:
                     self.unknown.append((tags, match_tags))
+                    logging.debug(json.dumps(tags) + ' - ' + json.dumps(match_tags))
                 else:
                     self.unknown.append(tags)
+                    logging.debug(json.dumps(tags))
     
     def __call__(self, toponym):
         """Apply the classification rules to the given toponym.
