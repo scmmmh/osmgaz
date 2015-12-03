@@ -35,7 +35,7 @@ def salience(session, obj, gaz, filtr, name_salience, type_salience):
     """Pre-calculate the name and type salience for the location"""
     query = session.query(obj).filter(and_(obj.name != '',
                                            obj.classification != None)).order_by(obj.gid)
-    for start in range(0, 1):  #math.ceil(query.count() / 1000)):
+    for start in range(0, math.ceil(query.count() / 1000)):
         for toponym in query.offset(start * 1000).limit(1000):
             geom = shape.to_shape(toponym.way)
             containment = gaz(gaz.proj(geom.centroid.x, geom.centroid.y, inverse=True))
