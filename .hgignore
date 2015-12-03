@@ -7,3 +7,5 @@ syntax: regexp
 ^\.pydevproject$
 syntax: regexp
 ^\.settings$
+syntax: regexp
+^dist$
