@@ -3,6 +3,7 @@ import json
 import logging
 import math
 
+from argparse import ArgumentParser
 from copy import deepcopy
 from geoalchemy2 import shape
 from shapely import wkt, geometry
@@ -10,6 +11,7 @@ from shapely.ops import linemerge
 from sqlalchemy import create_engine, and_
 from sqlalchemy.orm import sessionmaker
 
+from . import preprocess
 from .gazetteer import ContainmentGazetteer, ProximalGazetteer
 from .filters import ContainmentFilter, ProximalFilter, type_match
 from .classifier import NameSalienceCalculator, TypeSalienceCalculator
@@ -153,9 +155,7 @@ class OSMGaz(object):
             return data
 
 
-def main():
-    #with open('unknown.txt', 'w') as _:
-    #    pass
+def test(args):
     points = [
               (-2.63629, 53.39797), # Dakota Park
               (-1.88313, 53.38129), # Peak District
@@ -165,61 +165,20 @@ def main():
               (-2.04045, 53.34058), # Lyme Park
               (-2.47429, 53.3827),  # Lymm
               ]
-    gaz = OSMGaz('postgresql+psycopg2://osm:osmPWD@localhost:4321/osm')
+    gaz = OSMGaz(args.sqla_url)
     for point in points:
         print(point)
         data = gaz(point)
         print(', '.join([t['dc_title'] for t in data['osm_containment']]))
         print('\n'.join(['%s - %s (%.4f %.4f)' % (t['dc_title'], t['dc_type'], t['osm_salience']['name'], t['osm_salience']['type']) for t in data['osm_proximal']]))
 
-        # Find any unclassified toponyms
-        """for pnt in name_salience_calculator.session.query(Point).filter(and_(Point.name != '',
-                                                                               Point.classification == None,
-                                                                               Point.way.ST_DWithin(filtered_containment[0][0].way, 400))):
-            classification = type_salience_calculator.classifier(pnt)
-            if classification:
-                pnt.classification = '::'.join(classification['type'])
-        for line in name_salience_calculator.session.query(Line).filter(and_(Line.name != '',
-                                                                             Line.classification == None,
-                                                                             Line.way.ST_DWithin(filtered_containment[0][0].way, 400))):
-            classification = type_salience_calculator.classifier(line)
-            if classification:
-                line.classification = '::'.join(classification['type'])
-        for polygon in name_salience_calculator.session.query(Polygon).filter(and_(Polygon.name != '',
-                                                                                   Polygon.classification == None,
-                                                                                   Polygon.way.ST_DWithin(filtered_containment[0][0].way, 400))):
-            classification = type_salience_calculator.classifier(polygon)
-            if classification:
-                polygon.classification = '::'.join(classification['type'])
-        name_salience_calculator.session.commit()"""
-        #####
-    with open('unknown.txt', 'a') as out_f:
-        for tags in gaz.containment_gaz.classifier.get_unknown():
-            out_f.write('%s\n' % repr(tags))
-        for tags in gaz.proximal_gaz.classifier.get_unknown():
-            out_f.write('%s\n' % repr(tags))
 
-def preprocess():
-    """Pre-processes the complete data-set"""
-    def classify(query):
-        for toponym in query:
-            classification = classifier(toponym)
-            if classification is not None:
-                toponym.classification = '::'.join(classification)
-        session.commit()
-    logging.root.setLevel(logging.INFO)
-    gaz = OSMGaz('postgresql+psycopg2://osm:osmPWD@localhost:4321/osm')
-    session = gaz.proximal_gaz.session
-    classifier = gaz.proximal_gaz.classifier
-    for start in range(0, math.ceil(session.query(Point).count() / 1000)):
-        classify(session.query(Point).filter(Point.name != '').order_by(Point.gid).offset(start * 1000).limit(1000))
-        logging.info('Classified %i points' % ((start + 1) * 1000))
-    for start in range(0, math.ceil(session.query(Line).count() / 1000)):
-        classify(session.query(Line).filter(Line.name != '').order_by(Line.gid).offset(start * 1000).limit(1000))
-        logging.info('Classified %i lines' % ((start + 1) * 1000))
-    for start in range(0, math.ceil(session.query(Polygon).count() / 1000)):
-        classify(session.query(Polygon).filter(Polygon.name != '').order_by(Polygon.gid).offset(start * 1000).limit(1000))
-        logging.info('Classified %i polygons' % ((start + 1) * 1000))
-    with open('unknown.txt', 'w') as out_f:
-        for tags in classifier.get_unknown():
-            out_f.write('%s\n' % json.dumps(tags))
+def main():
+    parser = ArgumentParser()
+    parser.add_argument('action', choices=['pre-process', 'test'])
+    parser.add_argument('sqla_url')
+    args = parser.parse_args()
+    if args.action == 'test':
+        test(args)
+    elif args.action == 'pre-process':
+        preprocess.run(args)
