@@ -1,12 +1,13 @@
 import base64
 import json
 import logging
+import math
 
 from copy import deepcopy
 from geoalchemy2 import shape
 from shapely import wkt, geometry
 from shapely.ops import linemerge
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, and_
 from sqlalchemy.orm import sessionmaker
 
 from .gazetteer import ContainmentGazetteer, ProximalGazetteer
@@ -198,29 +199,27 @@ def main():
         for tags in gaz.proximal_gaz.classifier.get_unknown():
             out_f.write('%s\n' % repr(tags))
 
-"""
-Data must always be reprojected to EPSG:3857 (which in OSM terms is 900913)
-
-Hierarchy Processing
-
-#. Load all polygons that contain the point and have a name (UK needs UK polygon added)
-#. Run each toponym through the classifier
-#. Filter toponyms based on the classifications
-   Idea with filtering is to keep adding places that improve the spatial accuracy of the location
-
-Proximal Processing
-
-#. Load all nodes/ways/polygons that are within a distance (increase distance if nothing found) from the point and have
-   a name and are inside or within a specific distance from the smallest containment polygon
-#. Run each toponym through the classifier
-#. Filter unclassified toponyms
-#. Run each toponym through the salience calculator (needs the most-specific hierarchy toponym)
-#. Run each toponym through the "longevity" calculator (to factor in that some places are better references because they
-   are more permanent)
-#. Same principle, keep adding toponyms that improve the spatial accuracy of the location (Use the salience & longevity
-   & preposition applicability values to drive the selection)
-   This might need some additional weighting, such as "add a road first" a.k.a. preference for prepositions. Alternatively
-   it might be workable if we calculate positional accuracy using just distance-metric and then add toponyms until that is
-   maximised or hits a threshold. We could also possibly use the longevity metric as a stopping criterion -> if longevity
-   of the caption overall would go down by adding the highest-ranked toponym, then stop adding them.
-"""
+def preprocess():
+    """Pre-processes the complete data-set"""
+    def classify(query):
+        for toponym in query:
+            classification = classifier(toponym)
+            if classification is not None:
+                toponym.classification = '::'.join(classification)
+        session.commit()
+    logging.root.setLevel(logging.INFO)
+    gaz = OSMGaz('postgresql+psycopg2://osm:osmPWD@localhost:4321/osm')
+    session = gaz.proximal_gaz.session
+    classifier = gaz.proximal_gaz.classifier
+    for start in range(0, math.ceil(session.query(Point).count() / 1000)):
+        classify(session.query(Point).filter(Point.name != '').order_by(Point.gid).offset(start * 1000).limit(1000))
+        logging.info('Classified %i points' % ((start + 1) * 1000))
+    for start in range(0, math.ceil(session.query(Line).count() / 1000)):
+        classify(session.query(Line).filter(Line.name != '').order_by(Line.gid).offset(start * 1000).limit(1000))
+        logging.info('Classified %i lines' % ((start + 1) * 1000))
+    for start in range(0, math.ceil(session.query(Polygon).count() / 1000)):
+        classify(session.query(Polygon).filter(Polygon.name != '').order_by(Polygon.gid).offset(start * 1000).limit(1000))
+        logging.info('Classified %i polygons' % ((start + 1) * 1000))
+    with open('unknown.txt', 'w') as out_f:
+        for tags in classifier.get_unknown():
+            out_f.write('%s\n' % json.dumps(tags))

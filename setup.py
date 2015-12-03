@@ -33,6 +33,7 @@ setup(name='OSMGaz',
       install_requires=requires,
       entry_points = """\
       [console_scripts]
-      OSMGaz = osmgaz:main
+      OSMGaz-test = osmgaz:main
+      OSMGaz-preprocess = osmgaz:preprocess
       """,
 )
