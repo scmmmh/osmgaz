@@ -3,15 +3,16 @@ import json
 import logging
 
 from copy import deepcopy
-from geoalchemy2.shape import to_shape
-from shapely import wkt
+from geoalchemy2 import shape
+from shapely import wkt, geometry
+from shapely.ops import linemerge
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from .gazetteer import ContainmentGazetteer, ProximalGazetteer
-from .filters import ContainmentFilter, ProximalFilter
+from .filters import ContainmentFilter, ProximalFilter, type_match
 from .classifier import NameSalienceCalculator, TypeSalienceCalculator
-from .models import LookupCache
+from .models import LookupCache, Polygon, Line, Point
 
 
 class OSMGaz(object):
@@ -54,6 +55,63 @@ class OSMGaz(object):
                                      data=json.dumps(data)))
         self.session.commit()
     
+    def merge_lines(self, toponyms):
+        """Merge all line toponyms with the same name together."""
+        result = []
+        processed = []
+        for idx, (toponym1, classification) in enumerate(toponyms):
+            if isinstance(toponym1, Polygon) or isinstance(toponym1, Point):
+                result.append((toponym1, classification))
+                continue
+            if toponym1.osm_id in processed:
+                continue
+            geometries = [shape.to_shape(toponym1.way)]
+            for toponym2, _ in toponyms[idx + 1:]:
+                if toponym1.name == toponym2.name:
+                    geometries.append(shape.to_shape(toponym2.way))
+                    processed.append(toponym2.osm_id)
+            if len(geometries) > 1:
+                merged_toponym = Line(gid=toponym1.gid,
+                                      osm_id=toponym1.osm_id,
+                                      name=toponym1.name,
+                                      way=shape.from_shape(linemerge(geometries), 900913),
+                                      tags=toponym1.tags)
+                result.append((merged_toponym, classification))
+            else:
+                result.append((toponym1, classification))
+        return result
+
+    def add_intersections(self, toponyms):
+        """Add intersections between roads."""
+        processed = []
+        junctions = []
+        for idx, (toponym1, classification1) in enumerate(toponyms):
+            if isinstance(toponym1, Polygon) or isinstance(toponym1, Point) or not type_match(classification1['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD']):
+                continue
+            for toponym2, classification2 in toponyms[idx + 1:]:
+                if (toponym1.osm_id, toponym2.osm_id) in processed or (toponym2.osm_id, toponym1.osm_id) in processed or not type_match(classification2['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD']):
+                    continue
+                geom1 = shape.to_shape(toponym1.way)
+                geom2 = shape.to_shape(toponym2.way)
+                if geom1.intersects(geom2):
+                    processed.append((toponym1.osm_id, toponym2.osm_id))
+                    geom = geom1.intersection(geom2)
+                    if isinstance(geom, geometry.MultiPoint):
+                        for part in geom:
+                            junctions.append((Point(gid=-toponym1.gid,
+                                                    osm_id=-toponym1.osm_id,
+                                                    name='%s and %s' % (toponym1.name, toponym2.name),
+                                                    way=shape.from_shape(part, 900913)),
+                                              {'type': ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']}))
+                    else:
+                        junctions.append((Point(gid=-toponym1.gid,
+                                                osm_id=-toponym1.osm_id,
+                                                name='%s and %s' % (toponym1.name, toponym2.name),
+                                                way=shape.from_shape(geom, 900913)),
+                                          {'type': ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']}))
+        toponyms.extend(junctions)
+        return toponyms
+
     def __call__(self, point):
         """Run the gazetteer pipeline for a single point. Returns a dictionary with
         containment and proximal toponyms. The containment toponyms are sorted by
@@ -61,7 +119,7 @@ class OSMGaz(object):
         """
         def format_topo(toponym, classification, name_salience=None, type_salience=None):
             data = {'dc_title': toponym.name,
-                    'osm_geometry': wkt.dumps(to_shape(toponym.way)),
+                    'osm_geometry': wkt.dumps(shape.to_shape(toponym.way)),
                     'dc_type': classification['type']}
             if name_salience is not None or type_salience is not None:
                 data['osm_salience'] = {}
@@ -80,6 +138,8 @@ class OSMGaz(object):
             logging.info('Processing proximal toponyms')
             proximal = self.proximal_gaz(point, filtered_containment)
             filtered_proximal = self.proximal_filter(proximal, point, containment)
+            filtered_proximal = self.merge_lines(filtered_proximal)
+            filtered_proximal = self.add_intersections(filtered_proximal)
             data = {'osm_containment': [format_topo(t, c) for (t, c) in filtered_containment],
                     'osm_proximal': [format_topo(t, c, self.name_salience_calculator(t, filtered_containment), self.type_salience_calculator(c, filtered_containment))
                                      for (t, c) in filtered_proximal]}
@@ -103,8 +163,8 @@ def main():
     for point in points:
         print(point)
         data = gaz(point)
-        print(', '.join([t['name'] for t in data['containment']]))
-        print('\n'.join(['%s - %s (%.4f %.4f)' % (t['name'], t['type'], t['salience']['name'], t['salience']['type']) for t in data['proximal']]))
+        print(', '.join([t['dc_title'] for t in data['osm_containment']]))
+        print('\n'.join(['%s - %s (%.4f %.4f)' % (t['dc_title'], t['dc_type'], t['osm_salience']['name'], t['osm_salience']['type']) for t in data['osm_proximal']]))
 
         # Find any unclassified toponyms
         """for pnt in name_salience_calculator.session.query(Point).filter(and_(Point.name != '',
