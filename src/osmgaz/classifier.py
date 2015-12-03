@@ -65,6 +65,7 @@ class ToponymClassifier(object):
         # Add static ignore rules
         self.rules.extend([{'rules': {'public_transport': 'pay_scale_area'}},
                            {'rules': {'boundary': 'vice_county'}},
+                           {'rules': {'boundary': 'political'}},
                            {'rules': {'boundary': 'administrative', 'admin_level': '5'}},
                            {'rules': {'route': 'train'}},
                            {'rules': {'route': 'foot'}},
@@ -74,6 +75,7 @@ class ToponymClassifier(object):
                            {'rules': {'route': 'hiking'}},
                            {'rules': {'route': 'mtb'}},
                            {'rules': {'route': 'ferry'}},
+                           {'rules': {'route': 'tram'}},
                            {'rules': {'power': 'line'}},
                            {'rules': {'wpt_symbol': 'Waypoint'}},
                            {'rules': {'wpt_symbol': 'Crossing'}}])
@@ -94,7 +96,7 @@ class ToponymClassifier(object):
             if kw in tags:
                 del tags[kw]
         for tag in list(tags):
-            if tag.startswith('addr:') or tag.startswith('name:') or tag.startswith('building:') or tag.startswith('roof:') or tag.startswith('disused:') or tag.startswith('ref:') or tag.startswith('is_in:'):
+            if tag.startswith('addr:') or tag.startswith('name:') or tag.startswith('building:') or tag.startswith('roof:') or tag.startswith('disused:') or tag.startswith('ref:') or tag.startswith('is_in:') or tag.startswith('contact:') or tag == 'alt_name':
                 del tags[tag]
             if match_tags and tag in match_tags:
                 del tags[tag]
