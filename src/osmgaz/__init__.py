@@ -67,6 +67,8 @@ class OSMGaz(object):
                 continue
             geometries = [shape.to_shape(toponym1.way)]
             for toponym2, _ in toponyms[idx + 1:]:
+                if isinstance(toponym2, Polygon) or isinstance(toponym2, Point):
+                    continue
                 if toponym1.name == toponym2.name:
                     geometries.append(shape.to_shape(toponym2.way))
                     processed.append(toponym2.osm_id)
@@ -141,7 +143,10 @@ class OSMGaz(object):
             filtered_proximal = self.merge_lines(filtered_proximal)
             filtered_proximal = self.add_intersections(filtered_proximal)
             data = {'osm_containment': [format_topo(t, c) for (t, c) in filtered_containment],
-                    'osm_proximal': [format_topo(t, c, self.name_salience_calculator(t, filtered_containment), self.type_salience_calculator(c, filtered_containment))
+                    'osm_proximal': [format_topo(t,
+                                                 c,
+                                                 self.name_salience_calculator(t, filtered_containment) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 1,
+                                                 self.type_salience_calculator(c, filtered_containment) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 0)
                                      for (t, c) in filtered_proximal]}
             self.save(point, data)
             return data
