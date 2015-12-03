@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-u"""
+"""
 
 .. moduleauthor:: Mark Hall <mark.hall@mail.room3b.eu>
 """

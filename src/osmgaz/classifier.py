@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-u"""
+"""
 The classifier applies rules to the OSM tags to determine geography type hierarchies,
 which are returned as a list. An empty list means nothing matched
 

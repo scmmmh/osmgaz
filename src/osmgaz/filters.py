@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-u"""
+"""
 The filters module implements the functionality for filtering lists of toponyms.
 
 .. moduleauthor:: Mark Hall <mark.hall@mail.room3b.eu>
