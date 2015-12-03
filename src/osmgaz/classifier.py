@@ -76,6 +76,7 @@ class ToponymClassifier(object):
                            {'rules': {'route': 'mtb'}},
                            {'rules': {'route': 'ferry'}},
                            {'rules': {'route': 'tram'}},
+                           {'rules': {'route': 'road'}},
                            {'rules': {'power': 'line'}},
                            {'rules': {'wpt_symbol': 'Waypoint'}},
                            {'rules': {'wpt_symbol': 'Crossing'}}])
