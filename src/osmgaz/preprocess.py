@@ -57,7 +57,7 @@ def run(args):
     type_salience = TypeSalienceCalculator(args.sqla_url)
     for obj in [Polygon, Line, Point]:
         logging.info('Classifying all %s' % (obj.__name__))
-        #classify(session, obj, classifier)
+        classify(session, obj, classifier)
         logging.info('Salience classification for all %s' % (obj.__name__))
         salience(session,
                  obj,
