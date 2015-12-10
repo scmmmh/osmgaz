@@ -79,7 +79,14 @@ class ToponymClassifier(object):
                            {'rules': {'route': 'road'}},
                            {'rules': {'power': 'line'}},
                            {'rules': {'wpt_symbol': 'Waypoint'}},
-                           {'rules': {'wpt_symbol': 'Crossing'}}])
+                           {'rules': {'wpt_symbol': 'Crossing'}},
+                           {'rules': {'amenity': 'dog_agility_obstacle'}},
+                           {'rules': {'building': 'entrance'}},
+                           {'rules': {'entrance': 'residence'}},
+                           {'rules': {'amenity': 'vending_machine'}},
+                           {'rules': {'amenity': 'charging_station'}},
+                           {'rules': {'amenity': 'postbox'}},
+                           {'rules': {'pipeline': 'inspection_chamber'}}])
     
     def get_unknown(self):
         """Return the list of all unknown toponym types.
@@ -93,12 +100,16 @@ class ToponymClassifier(object):
         tags as unknown that are distinct from that set.
         """
         for kw in ['name', 'phone', 'wikipedia', 'route_name', 'route_pref_color', 'way_area', 'building:part',
-                   'website', 'wheelchair', 'postal_code', 'license_notice', 'description', 'operator']:
+                   'website', 'wheelchair', 'postal_code', 'license_notice', 'description', 'operator', 'alt_name',
+                   'email', 'old_name', 'date', 'opening_hours', 'genus', 'inscription', 'url', 'height', 'ref',
+                   'direction', 'is_in', 'species', 'wpt_description', 'wpt_symbol', 'ele']:
             if kw in tags:
                 del tags[kw]
         for tag in list(tags):
-            if tag.startswith('addr:') or tag.startswith('name:') or tag.startswith('building:') or tag.startswith('roof:') or tag.startswith('disused:') or tag.startswith('ref:') or tag.startswith('is_in:') or tag.startswith('contact:') or tag == 'alt_name':
-                del tags[tag]
+            for kw in ['addr:', 'name:', 'building:', 'roof:', 'disused:', 'ref:', 'is_in:', 'contact:', 'date:',
+                       'genus:']:
+                if tag.startswith(kw):
+                    del tags[tag]
             if match_tags and tag in match_tags:
                 del tags[tag]
         if len(tags) > 0:
