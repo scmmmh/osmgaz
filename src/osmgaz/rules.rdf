@@ -983,6 +983,16 @@
     
 
 
+    <!-- http://work.room3b.eu/ontology/osm_types#County -->
+
+    <owl:Class rdf:about="&osm_types;County">
+        <rdfs:label rdf:datatype="&xsd;string">County</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;Place"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;place&quot;: &quot;county&quot;}</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
     <!-- http://work.room3b.eu/ontology/osm_types#Courthouse -->
 
     <owl:Class rdf:about="&osm_types;Courthouse">
@@ -2066,7 +2076,7 @@
     <owl:Class rdf:about="&osm_types;Lighthouse">
         <rdfs:label rdf:datatype="&xsd;string">Lighthouse</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Tower"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;building&quot;: &quot;yes&quot;, &quot;man_made&quot;: &quot;lighthouse&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;building&quot;: &quot;yes&quot;, &quot;man_made&quot;: &quot;lighthouse&quot;}, {&quot;man_made&quot;: &quot;lighthouse&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 

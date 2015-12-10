@@ -109,7 +109,7 @@ class ToponymClassifier(object):
                 del tags[kw]
         for tag in list(tags):
             for kw in ['addr:', 'name:', 'building:', 'roof:', 'disused:', 'ref:', 'is_in:', 'contact:', 'date:',
-                       'genus:']:
+                       'genus:', 'seamark:']:
                 if tag.startswith(kw):
                     del tags[tag]
             if match_tags and tag in match_tags:

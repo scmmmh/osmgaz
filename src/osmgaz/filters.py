@@ -119,7 +119,7 @@ class ProximalFilter(object):
             accept = True
             if toponym.osm_id in containment_ids:
                 accept = False
-            if type_match(classification['type'], ['AREA', 'ADMINISTRATIVE']):
+            if type_match(classification['type'], ['AREA']):
                 accept = False
             if has_buildings:
                 if type_match(classification['type'], ['PLACE']):
