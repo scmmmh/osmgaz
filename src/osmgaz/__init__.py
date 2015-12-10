@@ -177,6 +177,7 @@ def main():
     parser = ArgumentParser()
     parser.add_argument('action', choices=['pre-process', 'test'])
     parser.add_argument('sqla_url')
+    parser.add_argument('--full', default=False, action='store_true')
     args = parser.parse_args()
     if args.action == 'test':
         test(args)

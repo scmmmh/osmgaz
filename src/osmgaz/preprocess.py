@@ -17,10 +17,13 @@ from osmgaz.gazetteer import ContainmentGazetteer
 from osmgaz.models import Point, Line, Polygon
 
 
-def classify(session, obj, classifier):
+def classify(session, obj, classifier, full):
     """Classify all entries of type obj using the classifier."""
-    query = session.query(obj).filter(and_(obj.name != '',
-                                           obj.classification == None)).order_by(obj.gid)
+    if full:
+        query = session.query(obj).filter(obj.name != '').order_by(obj.gid)
+    else:
+        query = session.query(obj).filter(and_(obj.name != '',
+                                               obj.classification == None)).order_by(obj.gid)
     for start in range(0, math.ceil(query.count() / 1000)):
         for toponym in query.offset(start * 1000).limit(1000):
             classification = classifier(toponym)
@@ -32,10 +35,13 @@ def classify(session, obj, classifier):
         logging.info('Classified %i %s' % ((start + 1) * 1000, obj.__name__))
 
 
-def salience(session, obj, gaz, filtr, name_salience, type_salience):
+def salience(session, obj, gaz, filtr, name_salience, type_salience, full):
     """Pre-calculate the name and type salience for the location"""
-    query = session.query(obj).filter(and_(obj.name != '',
-                                           obj.classification != None)).order_by(obj.gid)
+    if full:
+        query = session.query(obj).filter(obj.name != '').order_by(obj.gid)
+    else:
+        query = session.query(obj).filter(and_(obj.name != '',
+                                               obj.classification != None)).order_by(obj.gid)
     for start in range(0, math.ceil(query.count() / 1000)):
         for toponym in query.offset(start * 1000).limit(1000):
             geom = shape.to_shape(toponym.way)
@@ -70,3 +76,4 @@ def run(args):
                  containment_filter,
                  name_salience,
                  type_salience)
+
