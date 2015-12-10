@@ -64,7 +64,7 @@ def run(args):
     type_salience = TypeSalienceCalculator(args.sqla_url)
     for obj in [Polygon, Line, Point]:
         logging.info('Classifying all %s' % (obj.__name__))
-        classify(session, obj, classifier)
+        classify(session, obj, classifier, args.full)
     with open('unknown.txt', 'w') as out_f:
         for tags in classifier.get_unknown():
             out_f.write('%s\n' % json.dumps(tags))
@@ -75,5 +75,6 @@ def run(args):
                  gaz,
                  containment_filter,
                  name_salience,
-                 type_salience)
+                 type_salience,
+                 args.full)
 

@@ -69,6 +69,7 @@ class ToponymClassifier(object):
                      {'boundary': 'administrative', 'admin_level': '5'},
                      {'boundary': 'police'},
                      {'boundary': 'statistical'},
+                     {'boundary': 'protected_area'},
                      {'route': 'train'},
                      {'route': 'foot'},
                      {'route': 'bus'},
@@ -89,7 +90,8 @@ class ToponymClassifier(object):
                      {'amenity': 'charging_station'},
                      {'amenity': 'postbox'},
                      {'pipeline': 'inspection_chamber'},
-                     {'place': 'subdivision'}]:
+                     {'place': 'subdivision'},
+                     {'public_transport': 'stop_position'}]:
             self.rules.insert(0, {'rules': rule})
     
     def get_unknown(self):
@@ -106,7 +108,8 @@ class ToponymClassifier(object):
         for kw in ['name', 'phone', 'wikipedia', 'route_name', 'route_pref_color', 'way_area', 'building:part',
                    'website', 'wheelchair', 'postal_code', 'license_notice', 'description', 'operator', 'alt_name',
                    'email', 'old_name', 'date', 'opening_hours', 'genus', 'inscription', 'url', 'height', 'ref',
-                   'direction', 'is_in', 'species', 'wpt_description', 'wpt_symbol', 'ele', 'capacity', 'occupier']:
+                   'direction', 'is_in', 'species', 'wpt_description', 'wpt_symbol', 'ele', 'capacity', 'occupier',
+                   'polling_station', 'layer']:
             if kw in tags:
                 del tags[kw]
         for tag in list(tags):
