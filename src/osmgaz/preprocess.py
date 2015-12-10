@@ -58,6 +58,10 @@ def run(args):
     for obj in [Polygon, Line, Point]:
         logging.info('Classifying all %s' % (obj.__name__))
         classify(session, obj, classifier)
+    with open('unknown.txt', 'w') as out_f:
+        for tags in classifier.get_unknown():
+            out_f.write('%s\n' % json.dumps(tags))
+    for obj in [Polygon, Line, Point]:
         logging.info('Salience classification for all %s' % (obj.__name__))
         salience(session,
                  obj,
@@ -65,6 +69,3 @@ def run(args):
                  containment_filter,
                  name_salience,
                  type_salience)
-    with open('unknown.txt', 'w') as out_f:
-        for tags in classifier.get_unknown():
-            out_f.write('%s\n' % json.dumps(tags))
