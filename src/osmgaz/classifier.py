@@ -67,6 +67,8 @@ class ToponymClassifier(object):
                            {'rules': {'boundary': 'vice_county'}},
                            {'rules': {'boundary': 'political'}},
                            {'rules': {'boundary': 'administrative', 'admin_level': '5'}},
+                           {'rules': {'boundary': 'police'}},
+                           {'rules': {'boundary': 'statistical'}},
                            {'rules': {'route': 'train'}},
                            {'rules': {'route': 'foot'}},
                            {'rules': {'route': 'bus'}},
