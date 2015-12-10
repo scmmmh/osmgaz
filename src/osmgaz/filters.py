@@ -52,7 +52,7 @@ class ContainmentFilter(object):
             if len(filtered) == 0 or prev_size / float(toponym.tags['way_area']) <= 0.25:
                 filtered.append((toponym, classification))
                 prev_size = float(toponym.tags['way_area'])
-        if hierarchy[-1][0].tags['admin_level'] != filtered[-1][0].tags['admin_level']:
+        if len(hierarchy) > 0 and len(filtered) > 0 and hierarchy[-1][0].tags['admin_level'] != filtered[-1][0].tags['admin_level']:
             filtered.append(hierarchy[-1])
         return filtered
 
