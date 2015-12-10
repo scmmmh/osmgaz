@@ -19,7 +19,8 @@ from osmgaz.models import Point, Line, Polygon
 
 def classify(session, obj, classifier):
     """Classify all entries of type obj using the classifier."""
-    query = session.query(obj).filter(obj.name != '').order_by(obj.gid)
+    query = session.query(obj).filter(and_(obj.name != '',
+                                           obj.classification == None)).order_by(obj.gid)
     for start in range(0, math.ceil(query.count() / 1000)):
         for toponym in query.offset(start * 1000).limit(1000):
             classification = classifier(toponym)
