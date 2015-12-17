@@ -48,8 +48,9 @@ def salience(session, obj, gaz, filtr, name_salience, type_salience, full):
             containment = gaz(gaz.proj(geom.centroid.x, geom.centroid.y, inverse=True))
             containment = [(t, c) for (t, c) in containment if t.name != toponym.name]
             containment = filtr(containment[:-1])
-            name_salience(toponym, containment)
-            type_salience({'type': toponym.classification.split('::')}, containment)
+            if containment:
+                name_salience(toponym, containment)
+                type_salience({'type': toponym.classification.split('::')}, containment)
         logging.info('Salience calculated for %i %s' % ((start + 1) * 1000, obj.__name__))
 
 
