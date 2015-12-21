@@ -13,7 +13,8 @@ requires = ['shapely',
             'psycopg2',
             'geoalchemy2',
             'pyproj',
-            'rdflib']
+            'rdflib',
+            'numpy']
 
 
 setup(name='OSMGaz',
