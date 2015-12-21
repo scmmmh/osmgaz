@@ -156,7 +156,7 @@ class OSMGaz(object):
                                                  c,
                                                  self.name_salience_calculator(t, filtered_containment) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 1,
                                                  self.type_salience_calculator(c, filtered_containment) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 0,
-                                                 self.flickr_salience_calculator(t, urban_rural))
+                                                 self.flickr_salience_calculator(t, urban_rural) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 0)
                                      for (t, c) in filtered_proximal]}
             self.save(point, data)
             return data
