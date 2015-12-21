@@ -249,6 +249,7 @@ class FlickrSalienceCalculator(object):
         self.proj = Proj('+init=EPSG:3857')
 
     def __call__(self, toponym, urban_rural):
+        logging.debug('Calculating flickr salience for %s' % toponym.name)
         cache = self.session.query(FlickrSalienceCache).filter(FlickrSalienceCache.toponym_id == toponym.gid).first()
         if cache is not None:
             return int(cache.salience)
