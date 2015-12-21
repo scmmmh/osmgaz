@@ -9,13 +9,36 @@ import json
 import logging
 
 from copy import deepcopy
+from geoalchemy2 import shape
+from httplib2 import Http
 from pkg_resources import resource_stream
+from pyproj import Proj
 from rdflib import Graph, URIRef
 from rdflib.namespace import RDFS
+from shapely import geometry
 from sqlalchemy import create_engine, and_
 from sqlalchemy.orm import sessionmaker
+from urllib.parse import urlencode
 
-from .models import Point, Line, Polygon, NameSalienceCache, TypeSalienceCache
+from .filters import type_match
+from .models import (Point, Line, Polygon, NameSalienceCache, TypeSalienceCache, FlickrSalienceCache)
+
+
+class UrbanRuralClassifier(object):
+    """Urban/Rural classification based on whether there is a building within
+    400m. 
+    """
+    
+    def __init__(self):
+        self.proj = Proj('+init=EPSG:3857')
+    
+    def __call__(self, point, toponyms):
+        point = geometry.Point(*self.proj(*point))
+        for toponym, type_ in toponyms:
+            if point.distance(shape.to_shape(toponym.way)) <= 400 and type_match(type_['type'], ['ARTIFICIAL FEATURE', 'BUILDING']):
+                return 'URBAN'
+        return 'RURAL'
+
 
 class ToponymClassifier(object):
     """Classifies toponyms based on the rules defined in the ontology.
@@ -212,3 +235,44 @@ class TypeSalienceCalculator(object):
                                            salience=salience))
         self.session.commit()
         return salience
+
+
+class FlickrSalienceCalculator(object):
+    """Calculates the salience of a set of toponyms based on Flickr photograph use.
+    """
+    
+    def __init__(self, sqlalchemy_url):
+        engine = create_engine(sqlalchemy_url)
+        Session = sessionmaker(bind=engine)
+        self.session = Session()
+        self.classifier = ToponymClassifier()
+        self.proj = Proj('+init=EPSG:3857')
+
+    def __call__(self, toponym, urban_rural):
+        cache = self.session.query(FlickrSalienceCache).filter(FlickrSalienceCache.toponym_id == toponym.gid).first()
+        if cache is not None:
+            return int(cache.salience)
+        else:
+            try:
+                centroid = shape.to_shape(toponym.way).centroid
+                centroid = self.proj(centroid.x, centroid.y, inverse=True)
+                http = Http()
+                if urban_rural == 'URBAN':
+                    distance = '0.4'
+                else:
+                    distance = '3'
+                response, data = http.request('https://api.flickr.com/services/rest/?%s' % urlencode({'api_key': 'f9394a32075e4ee39605c618e65dce4a',
+                                                                                                      'method': 'flickr.photos.search',
+                                                                                                      'text': '"%s"' % toponym.name,
+                                                                                                      'lat': '%f' % centroid[1],
+                                                                                                      'lon': '%f' % centroid[0],
+                                                                                                      'radius': distance,
+                                                                                                      'format': 'json',
+                                                                                                      'nojsoncallback': '1'}))
+                data = json.loads(data.decode('utf-8'))
+                self.session.add(FlickrSalienceCache(toponym_id=toponym.gid,
+                                                     salience=int(data['photos']['total'])))
+                self.session.commit()
+                return int(data['photos']['total'])
+            except:
+                return 0

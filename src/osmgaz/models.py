@@ -72,6 +72,15 @@ class TypeSalienceCache(Base):
     salience = Column(Numeric)
 
 
+class FlickrSalienceCache(Base):
+    
+    __tablename__ = 'flickr_salience_cache'
+    
+    id = Column(Integer, primary_key=True)
+    toponym_id = Column(Integer)
+    salience = Column(Numeric)
+
+
 class LookupCache(Base):
     
     __tablename__ = 'lookup_cache'

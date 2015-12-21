@@ -14,7 +14,8 @@ from sqlalchemy.orm import sessionmaker
 from . import preprocess
 from .gazetteer import ContainmentGazetteer, ProximalGazetteer
 from .filters import ContainmentFilter, ProximalFilter, type_match
-from .classifier import NameSalienceCalculator, TypeSalienceCalculator
+from .classifier import (NameSalienceCalculator, TypeSalienceCalculator,
+                         FlickrSalienceCalculator, UrbanRuralClassifier)
 from .models import LookupCache, Polygon, Line, Point
 
 
@@ -32,6 +33,8 @@ class OSMGaz(object):
         self.proximal_filter = ProximalFilter(self.proximal_gaz)
         self.name_salience_calculator = NameSalienceCalculator(sqlalchemy_uri)
         self.type_salience_calculator = TypeSalienceCalculator(sqlalchemy_uri)
+        self.flickr_salience_calculator = FlickrSalienceCalculator(sqlalchemy_uri)
+        self.urban_rural_classifier = UrbanRuralClassifier()
 
     def load(self, point):
         cache = self.session.query(LookupCache).filter(LookupCache.point == '%.5f::%.5f' % point).first()
@@ -122,16 +125,18 @@ class OSMGaz(object):
         containment and proximal toponyms. The containment toponyms are sorted by
         containment hierarchy. The proximal toponyms are in a random order.
         """
-        def format_topo(toponym, classification, name_salience=None, type_salience=None):
+        def format_topo(toponym, classification, name_salience=None, type_salience=None, flickr_salience=None):
             data = {'dc_title': toponym.name,
                     'osm_geometry': wkt.dumps(shape.to_shape(toponym.way)),
                     'dc_type': classification['type']}
-            if name_salience is not None or type_salience is not None:
+            if name_salience is not None or type_salience is not None or flickr_salience is not None:
                 data['osm_salience'] = {}
                 if name_salience is not None:
                     data['osm_salience']['name'] = name_salience
                 if type_salience is not None:
                     data['osm_salience']['type'] = type_salience
+                if flickr_salience is not None:
+                    data['osm_salience']['flickr'] = flickr_salience
             return data
         cache = self.load(point)
         if cache:
@@ -142,14 +147,16 @@ class OSMGaz(object):
             filtered_containment = self.containment_filter(containment)
             logging.info('Processing proximal toponyms')
             proximal = self.proximal_gaz(point, filtered_containment)
-            filtered_proximal = self.proximal_filter(proximal, point, containment)
+            urban_rural = self.urban_rural_classifier(point, proximal)
+            filtered_proximal = self.proximal_filter(proximal, point, containment, urban_rural)
             filtered_proximal = self.merge_lines(filtered_proximal)
             filtered_proximal = self.add_intersections(filtered_proximal)
             data = {'osm_containment': [format_topo(t, c) for (t, c) in filtered_containment],
                     'osm_proximal': [format_topo(t,
                                                  c,
                                                  self.name_salience_calculator(t, filtered_containment) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 1,
-                                                 self.type_salience_calculator(c, filtered_containment) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 0)
+                                                 self.type_salience_calculator(c, filtered_containment) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 0,
+                                                 self.flickr_salience_calculator(t, urban_rural))
                                      for (t, c) in filtered_proximal]}
             self.save(point, data)
             return data
@@ -170,7 +177,8 @@ def test(args):
         print(point)
         data = gaz(point)
         print(', '.join([t['dc_title'] for t in data['osm_containment']]))
-        print('\n'.join(['%s - %s (%.4f %.4f)' % (t['dc_title'], t['dc_type'], t['osm_salience']['name'], t['osm_salience']['type']) for t in data['osm_proximal']]))
+        #print('\n'.join(['%s - %s (%.4f %.4f)' % (t['dc_title'], t['dc_type'], t['osm_salience']['name'], t['osm_salience']['type']) for t in data['osm_proximal']]))
+        print('\n'.join(['%s (%.4f %.4f %i)' % (t['dc_title'], t['osm_salience']['name'], t['osm_salience']['type'], t['osm_salience']['flickr']) for t in data['osm_proximal']]))
 
 
 def main():
