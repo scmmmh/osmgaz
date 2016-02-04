@@ -93,6 +93,7 @@ class ToponymClassifier(object):
                      {'boundary': 'police'},
                      {'boundary': 'statistical'},
                      {'boundary': 'protected_area'},
+                     {'boundary': 'toll'},
                      {'route': 'train'},
                      {'route': 'foot'},
                      {'route': 'bus'},
