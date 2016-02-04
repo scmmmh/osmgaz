@@ -132,11 +132,11 @@ class OSMGaz(object):
             if name_salience is not None or type_salience is not None or flickr_salience is not None:
                 data['osm_salience'] = {}
                 if name_salience is not None:
-                    data['osm_salience']['name'] = name_salience
+                    data['osm_salience']['name'] = float(name_salience)  # Todo: Remove float() call when the JSON serialiser can handle Decimals
                 if type_salience is not None:
-                    data['osm_salience']['type'] = type_salience
+                    data['osm_salience']['type'] = float(type_salience)
                 if flickr_salience is not None:
-                    data['osm_salience']['flickr'] = flickr_salience
+                    data['osm_salience']['flickr'] = float(flickr_salience)
             return data
         cache = self.load(point)
         if cache:
