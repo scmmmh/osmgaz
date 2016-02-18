@@ -16,7 +16,7 @@ from pyproj import Proj
 from rdflib import Graph, URIRef
 from rdflib.namespace import RDFS
 from shapely import geometry
-from sqlalchemy import create_engine, and_
+from sqlalchemy import create_engine, and_, not_
 from sqlalchemy.orm import sessionmaker
 from urllib.parse import urlencode
 
@@ -181,19 +181,30 @@ class NameSalienceCalculator(object):
         Session = sessionmaker(bind=engine)
         self.session = Session()
 
-    def __call__(self, toponym, containers):
+    def __call__(self, toponym, classification, containers):
         logging.debug('Calculating name salience for %s in %s' % (toponym.name, containers[0][0].name))
         cache = self.session.query(NameSalienceCache).filter(and_(NameSalienceCache.category == type(toponym).__name__,
                                                                   NameSalienceCache.toponym_id == toponym.gid,
                                                                   NameSalienceCache.container_id == containers[0][0].gid)).first()
         if cache:
             return cache.salience
-        count = self.session.query(Point).filter(and_(Point.name == toponym.name,
-                                                      Point.way.ST_DWithin(containers[0][0].way, 400))).count()
-        count = count + self.session.query(Line).filter(and_(Line.name == toponym.name,
-                                                             Line.way.ST_DWithin(containers[0][0].way, 400))).count()
-        count = count + self.session.query(Polygon).filter(and_(Polygon.name == toponym.name,
-                                                                Polygon.way.ST_DWithin(containers[0][0].way, 400))).count()
+        if type_match(classification['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'PUBLIC']):
+            count = self.session.query(Point).filter(and_(Point.name == toponym.name,
+                                                          Point.way.ST_DWithin(containers[0][0].way, 400))).count()
+            count = count + self.session.query(Line).filter(and_(Line.name == toponym.name,
+                                                                 Line.way.ST_DWithin(containers[0][0].way, 400))).count()
+            count = count + self.session.query(Polygon).filter(and_(Polygon.name == toponym.name,
+                                                                    Polygon.way.ST_DWithin(containers[0][0].way, 400))).count()
+        else:
+            count = self.session.query(Point).filter(and_(Point.name == toponym.name,
+                                                          not_(Point.classification.startswith('ARTIFICIAL FEATURE::TRANSPORT::PUBLIC')),
+                                                          Point.way.ST_DWithin(containers[0][0].way, 400))).count()
+            count = count + self.session.query(Line).filter(and_(Line.name == toponym.name,
+                                                                 not_(Line.classification.startswith('ARTIFICIAL FEATURE::TRANSPORT::PUBLIC')),
+                                                                 Line.way.ST_DWithin(containers[0][0].way, 400))).count()
+            count = count + self.session.query(Polygon).filter(and_(Polygon.name == toponym.name,
+                                                                    not_(Polygon.classification.startswith('ARTIFICIAL FEATURE::TRANSPORT::PUBLIC')),
+                                                                    Polygon.way.ST_DWithin(containers[0][0].way, 400))).count()
         salience = 0
         if count > 0:
             salience = 1.0 / count

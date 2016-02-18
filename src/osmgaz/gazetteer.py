@@ -30,10 +30,18 @@ class Gazetteer(object):
         toponyms that can be classifed using the classifier module.
         """
         toponyms = []
+        classified = 0
         for toponym in query:
-            classification = self.classifier(toponym)
-            if classification:
-                toponyms.append((toponym, classification))
+            if toponym.classification is None:
+                classification = self.classifier(toponym)
+                if classification:
+                    classified = classified + 1
+                    toponym.classification = '::'.join(classification['type'])
+                    toponyms.append((toponym, classification))
+            else:
+                toponyms.append((toponym, {'type': toponym.classification.split('::')}))
+        if classified > 0:
+            self.session.commit()
         return toponyms
         
 
