@@ -3256,7 +3256,7 @@
     <owl:Class rdf:about="&osm_types;Station">
         <rdfs:label rdf:datatype="&xsd;string">Station</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Rail"/>
-        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;railway&quot;: &quot;stop&quot;}, {&quot;railway&quot;: &quot;station&quot;}, {&quot;railway&quot;: &quot;halt&quot;}, {&quot;railway&quot;: &quot;station_site&quot;}, {&quot;railway&quot;: &quot;subway_entrance&quot;}, {&quot;railway&quot;: &quot;stopping_point&quot;}, {&quot;railway&quot;: &quot;tram_stop&quot;}, {&quot;building&quot;: &quot;train_station&quot;}, {&quot;public_transport&quot;: &quot;platform&quot;}]</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;railway&quot;: &quot;stop&quot;}, {&quot;railway&quot;: &quot;station&quot;}, {&quot;railway&quot;: &quot;halt&quot;}, {&quot;railway&quot;: &quot;station_site&quot;}, {&quot;railway&quot;: &quot;subway_entrance&quot;}, {&quot;railway&quot;: &quot;stopping_point&quot;}, {&quot;building&quot;: &quot;train_station&quot;}, {&quot;public_transport&quot;: &quot;platform&quot;}]</rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -3497,6 +3497,16 @@
         <rdfs:label rdf:datatype="&xsd;string">Trade</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Retail"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">[{&quot;shop&quot;: &quot;trade&quot;}, {&quot;shop&quot;: &quot;builders_merchants&quot;}]</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#TramStop -->
+
+    <owl:Class rdf:about="&osm_types;TramStop">
+        <rdfs:label rdf:datatype="&xsd;string">Tram stop</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&osm_types;PublicTransport"/>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;railway&quot;: &quot;tram_stop&quot;}</rdfs:isDefinedBy>
     </owl:Class>
     
 
