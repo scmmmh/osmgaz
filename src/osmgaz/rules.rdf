@@ -304,7 +304,7 @@
     <!-- http://work.room3b.eu/ontology/osm_types#Automobile -->
 
     <owl:Class rdf:about="&osm_types;Automobile">
-        <rdfs:label rdf:datatype="&xsd;string">Car</rdfs:label>
+        <rdfs:label rdf:datatype="&xsd;string">Carpark</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Parking"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;parking&quot;}</rdfs:isDefinedBy>
     </owl:Class>
@@ -444,7 +444,7 @@
     <!-- http://work.room3b.eu/ontology/osm_types#BicycleParking -->
 
     <owl:Class rdf:about="&osm_types;BicycleParking">
-        <rdfs:label rdf:datatype="&xsd;string">Bicycle</rdfs:label>
+        <rdfs:label rdf:datatype="&xsd;string">Bike-park</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Parking"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;bicycle_parking&quot;}</rdfs:isDefinedBy>
     </owl:Class>
@@ -2304,7 +2304,7 @@
     <!-- http://work.room3b.eu/ontology/osm_types#MotorcycleParking -->
 
     <owl:Class rdf:about="&osm_types;MotorcycleParking">
-        <rdfs:label rdf:datatype="&xsd;string">Motorcycle</rdfs:label>
+        <rdfs:label rdf:datatype="&xsd;string">Motorcycle Parking</rdfs:label>
         <rdfs:subClassOf rdf:resource="&osm_types;Parking"/>
         <rdfs:isDefinedBy rdf:datatype="&xsd;string">{&quot;amenity&quot;: &quot;motorcycle_parking&quot;}</rdfs:isDefinedBy>
     </owl:Class>
