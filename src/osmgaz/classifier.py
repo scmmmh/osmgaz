@@ -16,8 +16,7 @@ from pyproj import Proj
 from rdflib import Graph, URIRef
 from rdflib.namespace import RDFS
 from shapely import geometry
-from sqlalchemy import create_engine, and_, not_
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import and_, not_
 from urllib.parse import urlencode
 
 from .filters import type_match

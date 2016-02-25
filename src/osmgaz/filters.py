@@ -4,7 +4,6 @@ The filters module implements the functionality for filtering lists of toponyms.
 
 .. moduleauthor:: Mark Hall <mark.hall@mail.room3b.eu>
 """
-from geoalchemy2.shape import to_shape
 from shapely.geometry import Point
 from sqlalchemy import and_
 
