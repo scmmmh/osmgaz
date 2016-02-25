@@ -5,8 +5,7 @@
 """
 import logging
 
-from sqlalchemy import create_engine, and_
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import and_
 from geoalchemy2 import WKTElement
 from pyproj import Proj
 
@@ -18,10 +17,8 @@ class Gazetteer(object):
     """Generic Gazetteer object that creates the database connection.
     """
     
-    def __init__(self, sqlalchemy_url):
-        engine = create_engine(sqlalchemy_url)
-        Session = sessionmaker(bind=engine)
-        self.session = Session()
+    def __init__(self, session):
+        self.session = session
         self.proj = Proj('+init=EPSG:3857')
         self.classifier = ToponymClassifier()
     
@@ -49,9 +46,6 @@ class ContainmentGazetteer(Gazetteer):
     """Handles containment queries.
     """
 
-    def __init__(self, sqlalchemy_url):
-        Gazetteer.__init__(self, sqlalchemy_url)
-        
     def __call__(self, point):
         """Retrieves the full containment hierarchy for the point (WGS84 lon/lat).
         """

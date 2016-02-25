@@ -27,13 +27,13 @@ class OSMGaz(object):
         engine = create_engine(sqlalchemy_uri)
         Session = sessionmaker(bind=engine)
         self.session = Session()
-        self.containment_gaz = ContainmentGazetteer(sqlalchemy_uri)
+        self.containment_gaz = ContainmentGazetteer(self.session)
         self.containment_filter = ContainmentFilter(self.containment_gaz)
-        self.proximal_gaz = ProximalGazetteer(sqlalchemy_uri)
+        self.proximal_gaz = ProximalGazetteer(self.session)
         self.proximal_filter = ProximalFilter(self.proximal_gaz)
-        self.name_salience_calculator = NameSalienceCalculator(sqlalchemy_uri)
-        self.type_salience_calculator = TypeSalienceCalculator(sqlalchemy_uri)
-        self.flickr_salience_calculator = FlickrSalienceCalculator(sqlalchemy_uri)
+        self.name_salience_calculator = NameSalienceCalculator(self.session)
+        self.type_salience_calculator = TypeSalienceCalculator(self.session)
+        self.flickr_salience_calculator = FlickrSalienceCalculator(self.session)
         self.urban_rural_classifier = UrbanRuralClassifier()
 
     def load(self, point):

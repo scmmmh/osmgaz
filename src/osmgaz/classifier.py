@@ -176,10 +176,8 @@ class NameSalienceCalculator(object):
     """Calculates the uniqueness of the given name within the container.
     """
     
-    def __init__(self, sqlalchemy_url):
-        engine = create_engine(sqlalchemy_url)
-        Session = sessionmaker(bind=engine)
-        self.session = Session()
+    def __init__(self, session):
+        self.session = session
 
     def __call__(self, toponym, classification, containers):
         logging.debug('Calculating name salience for %s in %s' % (toponym.name, containers[0][0].name))
@@ -220,10 +218,8 @@ class TypeSalienceCalculator(object):
     """Calculates the uniqueness of the given toponym type within the container.
     """
     
-    def __init__(self, sqlalchemy_url):
-        engine = create_engine(sqlalchemy_url)
-        Session = sessionmaker(bind=engine)
-        self.session = Session()
+    def __init__(self, session):
+        self.session = session
         self.classifier = ToponymClassifier()
 
     def __call__(self, type_, containers):
@@ -253,10 +249,8 @@ class FlickrSalienceCalculator(object):
     """Calculates the salience of a set of toponyms based on Flickr photograph use.
     """
     
-    def __init__(self, sqlalchemy_url):
-        engine = create_engine(sqlalchemy_url)
-        Session = sessionmaker(bind=engine)
-        self.session = Session()
+    def __init__(self, session):
+        self.session = session
         self.classifier = ToponymClassifier()
         self.proj = Proj('+init=EPSG:3857')
 
@@ -274,14 +268,14 @@ class FlickrSalienceCalculator(object):
                     distance = '0.4'
                 else:
                     distance = '3'
-                response, data = http.request('https://api.flickr.com/services/rest/?%s' % urlencode({'api_key': 'f9394a32075e4ee39605c618e65dce4a',
-                                                                                                      'method': 'flickr.photos.search',
-                                                                                                      'text': '"%s"' % toponym.name,
-                                                                                                      'lat': '%f' % centroid[1],
-                                                                                                      'lon': '%f' % centroid[0],
-                                                                                                      'radius': distance,
-                                                                                                      'format': 'json',
-                                                                                                      'nojsoncallback': '1'}))
+                _, data = http.request('https://api.flickr.com/services/rest/?%s' % urlencode({'api_key': 'f9394a32075e4ee39605c618e65dce4a',
+                                                                                               'method': 'flickr.photos.search',
+                                                                                               'text': '"%s"' % toponym.name,
+                                                                                               'lat': '%f' % centroid[1],
+                                                                                               'lon': '%f' % centroid[0],
+                                                                                               'radius': distance,
+                                                                                               'format': 'json',
+                                                                                               'nojsoncallback': '1'}))
                 data = json.loads(data.decode('utf-8'))
                 self.session.add(FlickrSalienceCache(toponym_id=toponym.gid,
                                                      salience=int(data['photos']['total'])))
