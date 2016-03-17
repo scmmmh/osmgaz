@@ -49,6 +49,8 @@ class ToponymClassifier(object):
     
     def load_rules(self):
         """Load the classification rules from the ontology.
+        
+        Todo: Add leaf/interior node as sort criterion
         """
         def parse_tree(parent, ontology, path):
             for child, _, _ in ontology.triples((None, RDFS.subClassOf, parent)):
@@ -85,7 +87,7 @@ class ToponymClassifier(object):
         self.rules.sort(key=lambda r: (len(r['rules']), len(r['type'])), reverse=True)
         
         # Add static ignore rules
-        for rule in [{'public_transport': 'pay_scale_area'},
+        for rule in [{'public_transport': None},
                      {'boundary': 'vice_county'},
                      {'boundary': 'political'},
                      {'boundary': 'administrative', 'admin_level': '5'},
@@ -93,28 +95,24 @@ class ToponymClassifier(object):
                      {'boundary': 'statistical'},
                      {'boundary': 'protected_area'},
                      {'boundary': 'toll'},
-                     {'route': 'train'},
-                     {'route': 'foot'},
-                     {'route': 'bus'},
-                     {'route': 'railway'},
-                     {'route': 'bicycle'},
-                     {'route': 'hiking'},
-                     {'route': 'mtb'},
-                     {'route': 'ferry'},
-                     {'route': 'tram'},
-                     {'route': 'road'},
-                     {'power': 'line'},
-                     {'wpt_symbol': 'Waypoint'},
-                     {'wpt_symbol': 'Crossing'},
+                     {'boundary': 'site'},
+                     {'route': None},
+                     {'power': None},
+                     {'local_ref': None},
+                     {'wpt_symbol': None},
                      {'amenity': 'dog_agility_obstacle'},
+                     {'amenity': 'dead_pub'},
+                     {'amenity': 'drinking_water'},
                      {'building': 'entrance'},
-                     {'entrance': 'residence'},
+                     {'entrance': None},
                      {'amenity': 'vending_machine'},
                      {'amenity': 'charging_station'},
                      {'amenity': 'postbox'},
                      {'pipeline': 'inspection_chamber'},
                      {'place': 'subdivision'},
-                     {'public_transport': 'stop_position'}]:
+                     {'man_made': 'pipeline'},
+                     {'barrier': None},
+                     {'waterway': 'drain'}]:
             self.rules.insert(0, {'rules': rule})
     
     def get_unknown(self):
@@ -158,7 +156,7 @@ class ToponymClassifier(object):
         for rule in self.rules:
             matches = True
             for key, value in rule['rules'].items():
-                if key not in toponym.tags or toponym.tags[key] != value:
+                if key not in toponym.tags or (value is not None and toponym.tags[key] != value):
                     matches = False
             if matches:
                 if 'type' in rule:
