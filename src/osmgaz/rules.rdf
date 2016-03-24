@@ -616,7 +616,7 @@
 
     <owl:Class rdf:about="http://work.room3b.eu/ontology/osm_types#BusStop">
         <rdfs:subClassOf rdf:resource="http://work.room3b.eu/ontology/osm_types#PublicTransport"/>
-        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[{&quot;highway&quot;: &quot;bus_stop&quot;}, {&quot;amenity&quot;: &quot;bus_station&quot;}]</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[{&quot;highway&quot;: &quot;bus_stop&quot;}, {&quot;amenity&quot;: &quot;bus_station&quot;}, {&quot;highway&quot;: &quot;bus_stop&quot;, &quot;bus&quot;: &quot;yes&quot;, &quot;public_transport&quot;: &quot;platform&quot;}]</rdfs:isDefinedBy>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bus stop</rdfs:label>
     </owl:Class>
     
@@ -2007,7 +2007,17 @@
 
     <owl:Class rdf:about="http://work.room3b.eu/ontology/osm_types#Industrial">
         <rdfs:subClassOf rdf:resource="http://work.room3b.eu/ontology/osm_types#Building"/>
-        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[{&quot;building&quot;: &quot;industrial&quot;}, {&quot;landuse&quot;: &quot;industrial&quot;}, {&quot;building&quot;: &quot;manufacture&quot;}, {&quot;building&quot;: &quot;factory&quot;}, {&quot;building&quot;: &quot;yes&quot;, &quot;industry&quot;: &quot;yes&quot;}]</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[{&quot;building&quot;: &quot;industrial&quot;}, {&quot;building&quot;: &quot;manufacture&quot;}, {&quot;building&quot;: &quot;factory&quot;}, {&quot;building&quot;: &quot;yes&quot;, &quot;industry&quot;: &quot;yes&quot;}]</rdfs:isDefinedBy>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Industrial</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://work.room3b.eu/ontology/osm_types#IndustrialArea -->
+
+    <owl:Class rdf:about="http://work.room3b.eu/ontology/osm_types#IndustrialArea">
+        <rdfs:subClassOf rdf:resource="http://work.room3b.eu/ontology/osm_types#Area"/>
+        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{&quot;landuse&quot;: &quot;industrial&quot;}</rdfs:isDefinedBy>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Industrial</rdfs:label>
     </owl:Class>
     
@@ -3436,7 +3446,7 @@
 
     <owl:Class rdf:about="http://work.room3b.eu/ontology/osm_types#Station">
         <rdfs:subClassOf rdf:resource="http://work.room3b.eu/ontology/osm_types#Rail"/>
-        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[{&quot;railway&quot;: &quot;stop&quot;}, {&quot;railway&quot;: &quot;station&quot;}, {&quot;railway&quot;: &quot;halt&quot;}, {&quot;railway&quot;: &quot;station_site&quot;}, {&quot;railway&quot;: &quot;subway_entrance&quot;}, {&quot;railway&quot;: &quot;stopping_point&quot;}, {&quot;building&quot;: &quot;train_station&quot;}, {&quot;public_transport&quot;: &quot;platform&quot;}]</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[{&quot;railway&quot;: &quot;stop&quot;}, {&quot;railway&quot;: &quot;station&quot;}, {&quot;railway&quot;: &quot;halt&quot;}, {&quot;railway&quot;: &quot;station_site&quot;}, {&quot;railway&quot;: &quot;subway_entrance&quot;}, {&quot;railway&quot;: &quot;stopping_point&quot;}, {&quot;building&quot;: &quot;train_station&quot;}]</rdfs:isDefinedBy>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Station</rdfs:label>
     </owl:Class>
     
@@ -3446,7 +3456,7 @@
 
     <owl:Class rdf:about="http://work.room3b.eu/ontology/osm_types#StationPlatform">
         <rdfs:subClassOf rdf:resource="http://work.room3b.eu/ontology/osm_types#Station"/>
-        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{&quot;railway&quot;: &quot;platform&quot;}</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[{&quot;railway&quot;: &quot;platform&quot;}, {&quot;public_transport&quot;: &quot;platform&quot;}]</rdfs:isDefinedBy>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Platform</rdfs:label>
     </owl:Class>
     
