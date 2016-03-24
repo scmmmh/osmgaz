@@ -44,11 +44,12 @@ class ContainmentFilter(object):
     def filter_increments(self, hierarchy):
         """This filters toponyms where the smaller of the two toponyms has more than 25% of the
         larger toponym's area. Ensures that there is actual spatial value added by the toponyms.
+        Buildings are never filtered.
         """ 
         filtered = []
         prev_size = 0
         for toponym, classification in hierarchy:
-            if len(filtered) == 0 or prev_size / float(toponym.tags['way_area']) <= 0.25:
+            if len(filtered) == 0 or prev_size / float(toponym.tags['way_area']) <= 0.25 or type_match(classification['type'], ['ARTIFICIAL FEATURE', 'BUILDING']):
                 filtered.append((toponym, classification))
                 prev_size = float(toponym.tags['way_area'])
         if len(hierarchy) > 0 and len(filtered) > 0 and hierarchy[-1][0].tags['admin_level'] != filtered[-1][0].tags['admin_level']:
@@ -58,7 +59,7 @@ class ContainmentFilter(object):
     def filter_unique(self, toponyms, figure_idx, ground_idx):
         """This filters the toponym(s) between figure_idx and ground_idx, if the toponym
         at figure_idx is unique within the ground_idx toponym. Removes pointless complexity
-        from the list of containment toponyms.
+        from the list of containment toponyms. Buildings are never filtered.
         """
         query = self.containment_gaz.session.query(Polygon).filter(and_(Polygon.name == toponyms[figure_idx][0].name,
                                                                         Polygon.way.ST_Intersects(toponyms[ground_idx][0].way)))
@@ -68,7 +69,7 @@ class ContainmentFilter(object):
                 if classification and classification['type'][:2] == toponyms[figure_idx][1]['type'][:2]:
                     unique = False
         if unique == True:
-            return toponyms[:figure_idx + 1] + toponyms[ground_idx:]
+            return toponyms[:figure_idx + 1] + [(t, c) for (t, c) in toponyms[figure_idx + 1:ground_idx] if type_match(c['type'], ['ARTIFICIAL FEATURE', 'BUILDING'])] + toponyms[ground_idx:]
         else:
             return toponyms
     
