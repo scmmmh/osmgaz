@@ -251,8 +251,10 @@ class FlickrSalienceCalculator(object):
         self.classifier = ToponymClassifier()
         self.proj = Proj('+init=EPSG:3857')
 
-    def __call__(self, toponym, urban_rural):
+    def __call__(self, toponym, classification, urban_rural):
         logging.debug('Calculating flickr salience for %s' % toponym.name)
+        if type_match(classification['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'PUBLIC']):
+            return 0
         cache = self.session.query(FlickrSalienceCache).filter(FlickrSalienceCache.toponym_id == toponym.gid).first()
         if cache is not None:
             return int(cache.salience)

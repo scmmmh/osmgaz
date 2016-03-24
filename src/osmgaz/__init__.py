@@ -17,6 +17,7 @@ from .filters import ContainmentFilter, ProximalFilter, type_match
 from .classifier import (NameSalienceCalculator, TypeSalienceCalculator,
                          FlickrSalienceCalculator, UrbanRuralClassifier)
 from .models import LookupCache, Polygon, Line, Point
+from osmgaz.filters import type_match
 
 
 class OSMGaz(object):
@@ -151,12 +152,16 @@ class OSMGaz(object):
             filtered_proximal = self.proximal_filter(proximal, point, containment, urban_rural)
             filtered_proximal = self.merge_lines(filtered_proximal)
             filtered_proximal = self.add_intersections(filtered_proximal)
-            data = {'osm_containment': [format_topo(t, c) for (t, c) in filtered_containment],
+            data = {'osm_containment': [format_topo(t,
+                                                    c,
+                                                    self.name_salience_calculator(t, c, filtered_containment[1:]) if type_match(c['type'], ['ARTIFICIAL FEATURE', 'BUILDING']) else None,
+                                                    self.type_salience_calculator(c, filtered_containment[1:]) if type_match(c['type'], ['ARTIFICIAL FEATURE', 'BUILDING']) else None,
+                                                    self.flickr_salience_calculator(t, c, urban_rural) if type_match(c['type'], ['ARTIFICIAL FEATURE', 'BUILDING']) else None) for (t, c) in filtered_containment],
                     'osm_proximal': [format_topo(t,
                                                  c,
                                                  self.name_salience_calculator(t, c, filtered_containment) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 1,
                                                  self.type_salience_calculator(c, filtered_containment) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 0,
-                                                 self.flickr_salience_calculator(t, urban_rural) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 0)
+                                                 self.flickr_salience_calculator(t, c, urban_rural) if not type_match(c['type'], ['ARTIFICIAL FEATURE', 'TRANSPORT', 'ROAD', 'JUNCTION']) else 0)
                                      for (t, c) in filtered_proximal]}
             self.save(point, data)
             return data
