@@ -24,7 +24,7 @@ class OSMGaz(object):
     """Main interface object, handles the full gazetteer pipeline.
     """
 
-    def __init__(self, sqlalchemy_uri):
+    def __init__(self, sqlalchemy_uri, callback=None):
         engine = create_engine(sqlalchemy_uri)
         Session = sessionmaker(bind=engine)
         self.session = Session()
@@ -36,6 +36,7 @@ class OSMGaz(object):
         self.type_salience_calculator = TypeSalienceCalculator(self.session)
         self.flickr_salience_calculator = FlickrSalienceCalculator(self.session)
         self.urban_rural_classifier = UrbanRuralClassifier()
+        self.callback = callback
 
     def load(self, point):
         cache = self.session.query(LookupCache).filter(LookupCache.point == '%.5f::%.5f' % point).first()
@@ -141,17 +142,23 @@ class OSMGaz(object):
             return data
         cache = self.load(point)
         if cache:
+            if self.callback is not None:
+                self.callback('Loading geo-data from cache')
             return cache
         else:
-            logging.info('Processing containment toponyms')
+            if self.callback is not None:
+                self.callback('Finding containment toponyms')
             containment = self.containment_gaz(point)
             filtered_containment = self.containment_filter(containment)
-            logging.info('Processing proximal toponyms')
+            if self.callback is not None:
+                self.callback('Finding proximal toponyms')
             proximal = self.proximal_gaz(point, filtered_containment)
             urban_rural = self.urban_rural_classifier(point, proximal)
             filtered_proximal = self.proximal_filter(proximal, point, containment, urban_rural)
             filtered_proximal = self.merge_lines(filtered_proximal)
             filtered_proximal = self.add_intersections(filtered_proximal)
+            if self.callback is not None:
+                self.callback('Calculating toponym salience')
             data = {'osm_containment': [format_topo(t,
                                                     c,
                                                     self.name_salience_calculator(t, c, filtered_containment[1:]) if type_match(c['type'], ['ARTIFICIAL FEATURE', 'BUILDING']) else None,
