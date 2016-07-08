@@ -3,7 +3,7 @@
 
 .. moduleauthor:: Mark Hall <mark.hall@mail.room3b.eu>
 """
-from sqlalchemy import Column, Integer, Numeric, Unicode, UnicodeText
+from sqlalchemy import Column, Integer, Numeric, Unicode, UnicodeText, create_engine, text
 from sqlalchemy.dialects.postgresql import HSTORE
 from sqlalchemy.ext.declarative import declarative_base
 from geoalchemy2 import Geometry
@@ -88,3 +88,22 @@ class LookupCache(Base):
     id = Column(Integer, primary_key=True)
     point = Column(Unicode(255))
     data = Column(UnicodeText)
+
+
+def setup_db(args):
+    """Alter the existing OSM database and create the cache tables."""
+    engine = create_engine(args.sqla_url)
+    ALTER_STATEMENTS = ['ALTER TABLE planet_osm_polygon ADD COLUMN gid SERIAL',
+                        'ALTER TABLE planet_osm_polygon ADD COLUMN classification VARCHAR(255)',
+                        'ALTER TABLE planet_osm_line ADD COLUMN gid SERIAL',
+                        'ALTER TABLE planet_osm_line ADD COLUMN classification VARCHAR(255)',
+                        'ALTER TABLE planet_osm_point ADD COLUMN gid SERIAL',
+                        'ALTER TABLE planet_osm_point ADD COLUMN classification VARCHAR(255)']
+    for statement in ALTER_STATEMENTS:
+        try:
+            print('Running: %s' % statement)
+            engine.execute(text(statement))
+        except Exception as e:
+            print(e)
+    print('Creating cache tables')
+    Base.metadata.create_all(engine)

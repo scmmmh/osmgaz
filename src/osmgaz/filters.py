@@ -49,9 +49,9 @@ class ContainmentFilter(object):
         filtered = []
         prev_size = 0
         for toponym, classification in hierarchy:
-            if len(filtered) == 0 or prev_size / float(toponym.tags['way_area']) <= 0.25 or type_match(classification['type'], ['ARTIFICIAL FEATURE', 'BUILDING']):
+            if len(filtered) == 0 or prev_size / toponym.way_area <= 0.25 or type_match(classification['type'], ['ARTIFICIAL FEATURE', 'BUILDING']):
                 filtered.append((toponym, classification))
-                prev_size = float(toponym.tags['way_area'])
+                prev_size = toponym.way_area
         if len(hierarchy) > 0 and len(filtered) > 0 and hierarchy[-1][0].tags['admin_level'] != filtered[-1][0].tags['admin_level']:
             filtered.append(hierarchy[-1])
         return filtered
@@ -92,7 +92,7 @@ class ContainmentFilter(object):
         if len(filtered) == 3:
             if type_match(filtered[0][1]['type'], ['AREA', 'ADMINISTRATIVE', '8']) and type_match(filtered[1][1]['type'], ['AREA', 'CEREMONIAL']):
                 filtered = self.filter_unique(filtered, 0, 2)
-        if len(filtered) > 0:
+        if len(filtered) >= 3:
             if type_match(filtered[0][1]['type'], ['AREA', 'NATIONAL PARK']):
                 filtered = self.filter_unique(filtered, 0, 2)
         return filtered

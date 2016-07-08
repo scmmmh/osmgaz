@@ -54,7 +54,7 @@ class ContainmentGazetteer(Gazetteer):
         toponyms = self.query(self.session.query(Polygon).filter(and_(Polygon.name != '',
                                                                       Polygon.way.ST_Contains(WKTElement('POINT(%f %f)' % coords,
                                                                                                          srid=900913)))))
-        toponyms.sort(key=lambda i: float(i[0].tags['way_area']))
+        toponyms.sort(key=lambda i: i[0].way_area)
         return toponyms
 
 

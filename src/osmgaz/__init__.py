@@ -10,14 +10,14 @@ from shapely import wkt, geometry
 from shapely.ops import linemerge
 from sqlalchemy import create_engine, and_
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import NullPool
 
 from . import preprocess
 from .gazetteer import ContainmentGazetteer, ProximalGazetteer
 from .filters import ContainmentFilter, ProximalFilter, type_match
 from .classifier import (NameSalienceCalculator, TypeSalienceCalculator,
                          FlickrSalienceCalculator, UrbanRuralClassifier)
-from .models import LookupCache, Polygon, Line, Point
-from osmgaz.filters import type_match
+from .models import LookupCache, Polygon, Line, Point, setup_db
 
 
 class OSMGaz(object):
@@ -25,7 +25,7 @@ class OSMGaz(object):
     """
 
     def __init__(self, sqlalchemy_uri, callback=None):
-        engine = create_engine(sqlalchemy_uri)
+        engine = create_engine(sqlalchemy_uri, poolclass=NullPool)
         Session = sessionmaker(bind=engine)
         self.session = Session()
         self.containment_gaz = ContainmentGazetteer(self.session)
@@ -195,11 +195,14 @@ def test(args):
 
 def main():
     parser = ArgumentParser()
-    parser.add_argument('action', choices=['pre-process', 'test'])
+    parser.add_argument('action', choices=['setup-db', 'pre-process', 'test'])
     parser.add_argument('sqla_url')
     parser.add_argument('--full', default=False, action='store_true')
     args = parser.parse_args()
-    if args.action == 'test':
+    if args.action == 'setup-db':
+        setup_db(args)
+    elif args.action == 'test':
         test(args)
     elif args.action == 'pre-process':
         preprocess.run(args)
+
