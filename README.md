@@ -6,4 +6,6 @@ It uses a hierarchical classification system and automatically maps all OSM feat
 
 It also provides salience calculation, that can be used to rank the proximal toponyms.
 
-**Unmaintained**: The gazetteer was developed for a research project [REF], but is no longer maintained or used by me.
+**Unmaintained**: The gazetteer was developed for a research project, but is no longer maintained or used by me. If you use it in a research project or publication, please cite:
+
+> Hall, Mark M. and Jones, Christopher B.: "Generating Geographical Locative Expressions with  Spatial Templates: A Toponym-Driven Approach".
